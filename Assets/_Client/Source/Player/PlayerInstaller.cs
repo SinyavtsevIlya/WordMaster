@@ -7,8 +7,16 @@ namespace WordMaster
     {
         public override void InstallBindings()
         {
+            Container.Bind<CompositeDisposable>().AsSingle();
+            
             Container.Bind<Player>().AsSingle();
             Container.Bind<ReactiveCollection<Word>>().AsSingle();
+
+            Container.Bind<Sequence>()
+                .FromSubContainerResolve()
+                .ByInstaller<SequenceInstaller>()
+                .WithKernel()
+                .AsSingle();
         }
     }
 }

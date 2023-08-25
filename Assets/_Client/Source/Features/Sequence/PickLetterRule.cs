@@ -3,24 +3,35 @@ using UniRx;
 
 namespace WordMaster
 {
-    public class PickLetterRule
+    public class PickLetterRule : IRule
     {
-        public PickLetterRule(Sequence sequence, Level level)
+        private readonly Sequence _sequence;
+        private readonly Level _level;
+        private readonly NodeFactory _nodeFactory;
+
+        public PickLetterRule(Sequence sequence, Level level, NodeFactory nodeFactory)
         {
-            var head = sequence.Head.Value.Letter;
+            _sequence = sequence;
+            _level = level;
+            _nodeFactory = nodeFactory;
+        }
+
+        public void Initialize()
+        {
+            var head = _sequence.Head.Value.Letter;
             
             head.Position.Subscribe(position =>
             {
-                if (TryGetCollision(level, head, out var collisionLetter))
+                if (TryGetCollision(_level, head, out var collisionLetter))
                 {
-                    var prevHead = sequence.Value.Last();
-                    var newHead = new Node(collisionLetter, prevHead);
+                    var prevHead = _sequence.Value.Last();
+                    var newHead = _nodeFactory.Create(collisionLetter, prevHead);
                     prevHead.Prev.Value = newHead;
                     
-                    sequence.Value.Add(newHead);
-                    level.Letters.Remove(collisionLetter);
+                    _sequence.Value.Add(newHead);
+                    _level.Letters.Remove(collisionLetter);
                 }
-            }).AddTo(sequence.Disposables);
+            }).AddTo(_sequence.Disposables);
         }
 
         private static bool TryGetCollision(Level level, Letter head, out Letter collisionLetter)

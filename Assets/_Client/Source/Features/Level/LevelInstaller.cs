@@ -20,7 +20,7 @@ namespace WordMaster
             Container.BindInterfacesTo<ReactiveCollection<Word>>().AsSingle();
             Container.Bind<LevelSettings>().FromInstance(_settings).AsSingle();
 
-            Container.Bind<LevelGenerationRule>().AsSingle();
+            Container.BindRule<LevelGenerationRule>();
         }
     }
 }

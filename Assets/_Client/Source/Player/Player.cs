@@ -6,7 +6,6 @@ namespace WordMaster
     {
         public Sequence Sequence { get; }
         public IReadOnlyReactiveCollection<Word> CompletedWords { get; }
-        
 
         public Player(Sequence sequence, IReadOnlyReactiveCollection<Word> completedWords)
         {
