@@ -16,13 +16,12 @@ namespace WordMaster
                 .ByInstaller<LevelInstaller>()
                 .WithKernel()
                 .AsSingle()
-                .WithArguments(_levelSettings);
+                .NonLazy();
 
             Container.BindFactory<char, Vector2, Letter, LetterFactory>()
                 .FromSubContainerResolve()
                 .ByInstaller<LetterInstaller>()
-                .AsSingle()
-                .WithArguments(_letterSettings);
+                .AsSingle();
 
             Container.Bind<Player>()
                 .FromSubContainerResolve()
@@ -30,6 +29,8 @@ namespace WordMaster
                 .WithKernel()
                 .AsSingle();
 
+            Container.BindInstance(_levelSettings).AsSingle();
+            Container.BindInstance(_letterSettings).AsSingle();
             Container.BindInstance(_nodeSettings).AsSingle();
         }
     }

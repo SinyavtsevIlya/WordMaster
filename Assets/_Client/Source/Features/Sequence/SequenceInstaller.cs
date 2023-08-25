@@ -25,6 +25,8 @@ namespace WordMaster
                 .AsSingle();
             
             Container.BindRule<PickLetterRule>();
+            
+            Container.BindSubKernel();
         }
     }
 }

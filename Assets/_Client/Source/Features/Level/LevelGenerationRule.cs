@@ -2,10 +2,11 @@
 using System.Linq;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace WordMaster
 {
-    public class LevelGenerationRule : IRule
+    public class LevelGenerationRule : IRule, IInitializable
     {
         private static readonly System.Random Random = new System.Random();
         private const string Chars = "абвгдеёжзиклмнопрстуфхцчшщъыьэюя";

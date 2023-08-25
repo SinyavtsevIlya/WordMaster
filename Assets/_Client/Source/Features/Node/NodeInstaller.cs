@@ -4,13 +4,6 @@ namespace WordMaster
 {
     public class NodeInstaller : Installer<NodeInstaller>
     {
-        private readonly LetterSettings _letterSettings;
-
-        public NodeInstaller(LetterSettings letterSettings)
-        {
-            _letterSettings = letterSettings;
-        }
-        
         public override void InstallBindings()
         {
             Container.Bind<Node>().AsSingle();
@@ -18,9 +11,9 @@ namespace WordMaster
             Container
                 .Bind<Letter>()
                 .FromSubContainerResolve()
-                .ByInstaller<LetterInstaller>()
-                .WithKernel()
-                .WithArguments(_letterSettings);
+                .ByInstaller<LetterInstaller>();
+
+            Container.BindSubKernel();
         }
     }
     

@@ -17,6 +17,8 @@ namespace WordMaster
                 .ByInstaller<SequenceInstaller>()
                 .WithKernel()
                 .AsSingle();
+            
+            Container.BindSubKernel();
         }
     }
 }
