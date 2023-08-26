@@ -5,9 +5,9 @@ namespace WordMaster
     public class Player
     {
         public Sequence Sequence { get; }
-        public IReadOnlyReactiveCollection<Word> CompletedWords { get; }
+        public IReactiveCollection<Word> CompletedWords { get; }
 
-        public Player(Sequence sequence, IReadOnlyReactiveCollection<Word> completedWords)
+        public Player(Sequence sequence, IReactiveCollection<Word> completedWords)
         {
             Sequence = sequence;
             CompletedWords = completedWords;

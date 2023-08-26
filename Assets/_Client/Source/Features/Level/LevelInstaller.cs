@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using UniRx;
+﻿using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -12,6 +12,11 @@ namespace WordMaster
             Container.BindInterfacesTo<ReactiveCollection<Letter>>().AsSingle();
             Container.BindInterfacesTo<ReactiveCollection<Word>>().AsSingle();
             Container.BindRule<LevelGenerationRule>();
+            
+            Container.BindFactory<char, Vector2, Letter, LetterFactory>()
+                .FromSubContainerResolve()
+                .ByInstaller<LetterInstaller>()
+                .AsSingle();
             
             Container.BindSubKernel();
         }

@@ -15,11 +15,12 @@ namespace WordMaster
 
         public CompositeDisposable Disposables => Letter.Disposables;
         
-        public Node(Letter letter, Node next, NodeSettings settings)
+        public Node(Letter letter, NodeSettings settings)
         {
             Letter = letter ?? throw new ArgumentNullException(nameof(letter));
             Settings = settings;
-            Next = new ReactiveProperty<Node>(next);
+            Prev = new ReactiveProperty<Node>();
+            Next = new ReactiveProperty<Node>();
         }
     }
 }

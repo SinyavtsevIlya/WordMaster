@@ -8,14 +8,11 @@ namespace WordMaster
         {
             Container.Bind<Node>().AsSingle();
 
-            Container
-                .Bind<Letter>()
-                .FromSubContainerResolve()
-                .ByInstaller<LetterInstaller>();
-
+            Container.BindRule<TailMovementRule>();
+            
             Container.BindSubKernel();
         }
     }
     
-    public class NodeFactory : PlaceholderFactory<Letter, Node, Node> { }
+    public class NodeFactory : PlaceholderFactory<Letter, Node> { }
 }

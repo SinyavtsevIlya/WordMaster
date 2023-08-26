@@ -14,20 +14,14 @@ namespace WordMaster
             Container.Bind<Level>()
                 .FromSubContainerResolve()
                 .ByInstaller<LevelInstaller>()
-                .WithKernel()
                 .AsSingle()
                 .NonLazy();
-
-            Container.BindFactory<char, Vector2, Letter, LetterFactory>()
-                .FromSubContainerResolve()
-                .ByInstaller<LetterInstaller>()
-                .AsSingle();
 
             Container.Bind<Player>()
                 .FromSubContainerResolve()
                 .ByInstaller<PlayerInstaller>()
-                .WithKernel()
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
 
             Container.BindInstance(_levelSettings).AsSingle();
             Container.BindInstance(_letterSettings).AsSingle();
