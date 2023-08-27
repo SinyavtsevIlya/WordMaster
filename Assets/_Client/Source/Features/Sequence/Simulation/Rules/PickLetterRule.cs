@@ -19,10 +19,10 @@ namespace WordMaster
 
         public void Initialize()
         {
-            var head = _sequence.Head.Value.Letter;
-            
-            head.Position.Subscribe(position =>
+            Observable.EveryUpdate().Subscribe(_ =>
             {
+                var head = _sequence.Head.Value.Letter;
+
                 if (TryGetCollision(_level, head, out var collisionLetter))
                 {
                     var prevHead = _sequence.Value.Last();

@@ -7,11 +7,13 @@ namespace WordMaster
     public class InputToHeadTrackingRule : IRule, IInitializable
     {
         private readonly Sequence _sequence;
+        private readonly SequenceSettings _settings;
         private readonly CompositeDisposable _disposables;
 
-        public InputToHeadTrackingRule(Sequence sequence, CompositeDisposable disposables)
+        public InputToHeadTrackingRule(Sequence sequence, SequenceSettings settings, CompositeDisposable disposables)
         {
             _sequence = sequence;
+            _settings = settings;
             _disposables = disposables;
         }
         
@@ -27,7 +29,9 @@ namespace WordMaster
         {
             mousePosition.z = 1f;
             var worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            _sequence.Head.Value.Letter.Position.Value = worldPosition;
+            var currentPosition = _sequence.Head.Value.Letter.Position.Value;
+            var t = Time.deltaTime * _settings.HeadTrackingSmoothness;
+            _sequence.Head.Value.Letter.Position.Value = Vector2.Lerp(currentPosition, worldPosition, t);
         }
     }
 }

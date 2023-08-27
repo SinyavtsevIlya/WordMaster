@@ -29,5 +29,10 @@ namespace WordMaster
             var normalizedValue = (float)index / _textLayers.Length;
             _textLayers[index].color = _settings.EvaluateColor(normalizedValue);
         }
+
+        public void PlayCompletion()
+        {
+            Destroy(gameObject);
+        }
     }
 }

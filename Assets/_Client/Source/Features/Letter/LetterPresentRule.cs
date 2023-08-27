@@ -1,4 +1,5 @@
 ﻿using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -18,6 +19,10 @@ namespace WordMaster
         {
             _view.SetCharacter(_letter.Value);
             _letter.Position.Subscribe(_view.SetPosition).AddTo(_letter.Disposables);
+
+            var completion = Disposable.Create(() => _view.PlayCompletion());
+            Debug.Log($"prepare {_letter.Value}");
+            completion.AddTo(_letter.Disposables);
         }
     }
 }

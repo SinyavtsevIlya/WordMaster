@@ -25,7 +25,7 @@ namespace WordMaster
                             var position = prev.Letter.Position.Value;
                             var t = Time.deltaTime * _node.Settings.VerticalMovementSmoothness;
                             var y = Mathf.Lerp(_node.Letter.Position.Value.y, position.y, t);
-                            var x = position.x - _node.Letter.Radius;
+                            var x = position.x - _node.Letter.Radius * 2;
                             _node.Letter.Position.Value = new Vector2(x, y);
                         })
                         .AddTo(prev.Disposables);

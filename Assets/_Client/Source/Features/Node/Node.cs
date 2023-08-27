@@ -3,7 +3,7 @@ using UniRx;
 
 namespace WordMaster
 {
-    public class Node
+    public class Node : IDisposable
     {
         public NodeSettings Settings { get; }
         
@@ -21,6 +21,11 @@ namespace WordMaster
             Settings = settings;
             Prev = new ReactiveProperty<Node>();
             Next = new ReactiveProperty<Node>();
+        }
+
+        public void Dispose()
+        {
+            Disposables.Dispose();
         }
     }
 }

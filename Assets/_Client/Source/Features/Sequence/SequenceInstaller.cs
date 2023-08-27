@@ -11,7 +11,7 @@ namespace WordMaster
             Container.Bind<Sequence>().AsSingle();
             Container.Bind<CompositeDisposable>().AsSingle();
             
-            Container.BindInterfacesTo<ReactiveCollection<Node>>().AsSingle();
+            Container.BindInterfacesTo<ClearableReactiveCollection<Node>>().AsSingle();
 
             Container.BindFactory<Letter, Node, NodeFactory>()
                 .FromSubContainerResolve()
@@ -20,12 +20,13 @@ namespace WordMaster
             
             Container.BindRule<PickLetterRule>();
             Container.BindRule<InputToHeadTrackingRule>();
+            Container.BindRule<MatchWordRule>();
 
             Container.Bind<Node>()
                 .FromSubContainerResolve()
                 .ByInstaller<HeadInstaller>()
                 .AsSingle();
-            
+
             Container.BindSubKernel();
         }
     }
