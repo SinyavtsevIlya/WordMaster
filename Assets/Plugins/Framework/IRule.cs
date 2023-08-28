@@ -32,3 +32,20 @@ public class ClearableReactiveCollection<T> : ReactiveCollection<T>
             RemoveItem(i);
     }
 }
+
+public static class LinqExtensions
+{
+    private static System.Random rnd = new System.Random();  
+
+    public static IList<T> Shuffle<T>(this IList<T> list)  
+    {  
+        var n = list.Count;  
+        while (n > 1) {  
+            n--;  
+            var k = rnd.Next(n + 1);  
+            (list[k], list[n]) = (list[n], list[k]);
+        }
+
+        return list;
+    }
+}

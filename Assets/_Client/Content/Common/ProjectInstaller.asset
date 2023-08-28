@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddbba10af6e4dde8655844d1d3b7c93, type: 3}
-  m_Name: SequenceSettings
+  m_Script: {fileID: 11500000, guid: 7baa64e421904a15a032208bf202de59, type: 3}
+  m_Name: ProjectInstaller
   m_EditorClassIdentifier: 
-  HeadTrackingSmoothness: 20

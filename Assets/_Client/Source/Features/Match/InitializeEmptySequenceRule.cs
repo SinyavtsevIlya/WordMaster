@@ -20,12 +20,26 @@ namespace WordMaster
         
         public void Initialize()
         {
-            _sequence.Value.ObserveCountChanged()
-                .Where(count => count == 0)
-                .Subscribe(_ =>
+            _sequence.Value.ObserveRemove()
+                .Where(removeEvent => removeEvent.Index == 0)
+                .Subscribe(removeEvent =>
                 {
-                    var letter = _letterFactory.Create(_alphabet.RandomValue, );
-                    _sequence.Value.Add(_nodeFactory.Create(letter));
+                    var letter = _letterFactory.Create(_alphabet.RandomValue, removeEvent.Value.Letter.Position.Value);
+                    var node = _nodeFactory.Create(letter);
+                    letter.AddTo(node.Disposables);
+                    _sequence.Value.Add(node);
+                }).AddTo(_sequence.Disposables);
+
+            _sequence.Value.ObserveAdd().Subscribe(addEvent =>
+            {
+                addEvent.Value.AddTo(_sequence.Disposables);
+                addEvent.Value.Letter.AddTo(_sequence.Disposables);
+            }).AddTo(_sequence.Disposables);
+            
+            _sequence.Value.ObserveRemove()
+                .Subscribe(removeEvent =>
+                {
+                    removeEvent.Value.Dispose();
                 }).AddTo(_sequence.Disposables);
         }
     }

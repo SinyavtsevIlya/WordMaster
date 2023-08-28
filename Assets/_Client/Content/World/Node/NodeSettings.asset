@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7df6a879fc44a69518bb5436934990, type: 3}
   m_Name: NodeSettings
   m_EditorClassIdentifier: 
-  VerticalMovementSmoothness: 1
+  VerticalMovementSmoothness: 15

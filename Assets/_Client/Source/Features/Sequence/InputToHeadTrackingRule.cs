@@ -9,12 +9,15 @@ namespace WordMaster
         private readonly Sequence _sequence;
         private readonly SequenceSettings _settings;
         private readonly CompositeDisposable _disposables;
+        private readonly Plane _plane;
 
         public InputToHeadTrackingRule(Sequence sequence, SequenceSettings settings, CompositeDisposable disposables)
         {
             _sequence = sequence;
             _settings = settings;
             _disposables = disposables;
+
+            _plane = new Plane(Vector3.forward, 0);
         }
         
         public void Initialize()
@@ -28,10 +31,14 @@ namespace WordMaster
         private void TrackPointerPosition(Vector3 mousePosition)
         {
             mousePosition.z = 1f;
-            var worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            var currentPosition = _sequence.Head.Value.Letter.Position.Value;
-            var t = Time.deltaTime * _settings.HeadTrackingSmoothness;
-            _sequence.Head.Value.Letter.Position.Value = Vector2.Lerp(currentPosition, worldPosition, t);
+            var ray = Camera.main.ScreenPointToRay(mousePosition);
+            if (_plane.Raycast(ray, out var distance))
+            {
+                var worldPosition = ray.GetPoint(distance);
+                var currentPosition = _sequence.Head.Value.Letter.Position.Value;
+                var t = Time.deltaTime * _settings.HeadTrackingSmoothness;
+                _sequence.Head.Value.Letter.Position.Value = Vector2.Lerp(currentPosition, worldPosition, t);
+            }
         }
     }
 }

@@ -18,9 +18,16 @@ namespace WordMaster
                 .ByInstaller<NodeInstaller>()
                 .AsSingle();
             
+            Container.BindFactory<char, Vector2, Letter, LetterFactory>()
+                .FromSubContainerResolve()
+                .ByInstaller<LetterInstaller>()
+                .AsSingle();
+            
             Container.BindRule<PickLetterRule>();
-            Container.BindRule<InputToHeadTrackingRule>();
             Container.BindRule<MatchWordRule>();
+            Container.BindRule<FailSequenceRule>();
+            Container.BindRule<InitializeEmptySequenceRule>();
+            Container.BindRule<InputToHeadTrackingRule>();
 
             Container.Bind<Node>()
                 .FromSubContainerResolve()

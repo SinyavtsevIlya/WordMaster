@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using UnityEngine;
@@ -27,25 +28,29 @@ namespace WordMaster
         {
             _player
                 .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + 10)
-                .Where(distancePassed => distancePassed % 10 == 0)
+                .Where(distancePassed => distancePassed % 5 == 0)
                 .Subscribe(GenerateLetters)
-                .AddTo(_player.Disposables);
+                .AddTo(_level.Disposables);
+
+            _level.Letters.ObserveAdd().Subscribe(addEvent => addEvent.Value.Disposables.AddTo(_level.Disposables));
         }
 
         private void GenerateLetters(int horizontalPosition)
         {
             if (_trie.Search(_player.Sequence.ToString(), out var variants, out var _))
             {
-                foreach (var variant in variants.Take(3))
+                var shuffledVariants = variants.Shuffle().Take(Random.Next(2,4)).ToList();
+                const int levelHeight = 15;
+                
+                var letterPlacements = Enumerable.Range(0, levelHeight).ToList().Shuffle().Take(shuffledVariants.Count).ToList();
+
+                for (var index = 0; index < shuffledVariants.Count; index++)
                 {
-                    var position = new Vector2(horizontalPosition, Random.Next(-10, 10));
+                    var variant = shuffledVariants[index];
+                    var position = new Vector2(horizontalPosition, letterPlacements[index]);
                     var letter = _letterFactory.Create(variant, position);
                     _level.Letters.Add(letter);
-                }   
-            }
-            else
-            {
-                Debug.Log("gameover");
+                }
             }
         }
     }

@@ -29,7 +29,11 @@ namespace WordMaster
                     if (_trie.Search(_sequence.ToString(), out var _, out var isEndOfTheWord))
                     {
                         if (isEndOfTheWord)
-                            _sequence.Value.Clear();
+                            _sequence.Complete();
+                    }
+                    else
+                    {
+                        _sequence.Fail();
                     }
                 }).AddTo(_sequence.Disposables);
 

@@ -7,5 +7,6 @@ namespace WordMaster
     {
         public float ScrollSpeed;
         public Camera Prefab;
+        public AnimationCurve CompletenessToSpeedup;
     }
 }

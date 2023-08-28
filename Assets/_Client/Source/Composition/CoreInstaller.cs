@@ -27,11 +27,8 @@ namespace WordMaster
 
             Container.Bind<Alphabet>().AsSingle()
                 .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя");
-
-            Container.Bind<Trie>()
-                .FromSubContainerResolve()
-                .ByInstaller<TrieInstaller>()
-                .AsSingle();
+            
+            Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
 
             Container.BindInstance(_levelSettings).AsSingle();
             Container.BindInstance(_letterSettings).AsSingle();

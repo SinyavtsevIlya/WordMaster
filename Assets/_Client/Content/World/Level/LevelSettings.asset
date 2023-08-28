@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546768db0422418f8f5a8443d8d05396, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
-  CharactersCount: 10
+  CharactersCount: 1
