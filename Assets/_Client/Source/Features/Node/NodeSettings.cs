@@ -6,5 +6,6 @@ namespace WordMaster
     public class NodeSettings : ScriptableObject
     {
         public float VerticalMovementSmoothness;
+        public float LettersSpacing;
     }
 }

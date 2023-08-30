@@ -1,10 +1,8 @@
 ﻿using UniRx;
-using UnityEngine;
-using Zenject;
 
 namespace WordMaster
 {
-    public class LetterPresentRule : IRule, IInitializable
+    public class LetterPresentRule : IRule
     {
         private readonly Letter _letter;
         private readonly LetterView _view;
@@ -18,6 +16,7 @@ namespace WordMaster
         public void Initialize()
         {
             _view.SetCharacter(_letter.Value);
+            Observable.EveryUpdate().Subscribe(_ => _letter.Width = _view.GetWidth());
             _letter.Position.Subscribe(_view.SetPosition).AddTo(_letter.Disposables);
 
             var completion = Disposable.Create(() => _view.PlayCompletion());

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UniRx;
 using UnityEngine;
-using Zenject;
 using Random = System.Random;
 
 namespace WordMaster
 {
-    public class LevelGenerationRule : IRule, IInitializable
+    public class LevelGenerationRule : IRule
     {
         private static readonly System.Random Random = new System.Random();
 
@@ -55,8 +52,10 @@ namespace WordMaster
                     .Take(takeRange).ToList();
 
                 _TokenlettersAmount += takeRange;
+
+                var wrongCharacters = range.y - takeRange;
                 
-                shuffledVariants.AddRange(_alphabet.Values.Shuffle().Take(_level.Settings.WrongCharactersPerStep.x));
+                shuffledVariants.AddRange(_alphabet.Values.Shuffle().Take(wrongCharacters));
                 
                 shuffledVariants.Shuffle();
 
@@ -65,7 +64,9 @@ namespace WordMaster
                 for (var index = 0; index < shuffledVariants.Count; index++)
                 {
                     var variant = shuffledVariants[index];
-                    var position = new Vector2(horizontalPosition + _level.Settings.GenerationOffset + Random.Next(-1, 1), letterPlacements[index]);
+                    var randomizationRange = _level.Settings.GenerationOffsetRandomization;
+                    var randomization = Random.Next(-randomizationRange, randomizationRange);
+                    var position = new Vector2(horizontalPosition + _level.Settings.GenerationOffset + randomization, letterPlacements[index]);
                     var letter = _letterFactory.Create(variant, position);
                     _level.Letters.Add(letter);
                 }

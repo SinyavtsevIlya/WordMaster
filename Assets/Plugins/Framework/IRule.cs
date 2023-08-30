@@ -1,11 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 public interface IRule
 {
+    void Initialize();
+}
+
+public class RuleRunner : IInitializable
+{
+    private readonly IEnumerable<IRule> _rules;
+
+    public RuleRunner(IEnumerable<IRule> rules)
+    {
+        _rules = rules;
+    }
+
+    public void Initialize()
+    {
+        foreach (var rule in _rules) 
+            rule.Initialize();
+    }
+}
+
+public struct BindEvent<TModel, TView>
+{
+    public TModel Model;
+    public TView View;
+    public CompositeDisposable Disposables;
+    
+    public BindEvent(TModel model, TView view, CompositeDisposable disposables)
+    {
+        Model = model;
+        View = view;
+        Disposables = disposables;
+    }
+}
+
+public class Binding<TModel, TView> : IObservable<BindEvent<TModel, TView>>
+{
+    private readonly CompositeDisposable _disposables;
+    public Subject<BindEvent<TModel, TView>> Subject { get;}
+
+    public Binding(Subject<BindEvent<TModel, TView>> subject, CompositeDisposable disposables)
+    {
+        _disposables = disposables;
+        Subject = subject;
+    }
+
+    public void Bind(TModel model, TView view) => Subject.OnNext(new BindEvent<TModel, TView>(model, view, _disposables));
+    public void Unbind() => _disposables.Clear();
+
+    public IDisposable Subscribe(IObserver<BindEvent<TModel, TView>> observer) => Subject.Subscribe(observer);
 }
 
 public static class RuleExtensions
@@ -13,6 +61,11 @@ public static class RuleExtensions
     public static void BindRule<TRule>(this DiContainer container, params object[] args) where TRule : IRule
     {
         container.BindInterfacesTo<TRule>().AsCached().WithArguments(args);
+    }
+
+    public static void BindRulesInitialization(this DiContainer container)
+    {
+        container.BindInterfacesTo<RuleRunner>().AsCached().NonLazy();
     }
 }
 

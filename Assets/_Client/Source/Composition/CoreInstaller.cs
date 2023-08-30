@@ -13,6 +13,8 @@ namespace WordMaster
 
         public override void InstallBindings()
         {
+            Container.BindRulesInitialization();
+            
             Container.Bind<Level>()
                 .FromSubContainerResolve()
                 .ByInstaller<LevelInstaller>()
@@ -29,7 +31,7 @@ namespace WordMaster
                 .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");
             
             Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
-
+            
             Container.BindInstance(_levelSettings).AsSingle();
             Container.BindInstance(_letterSettings).AsSingle();
             Container.BindInstance(_nodeSettings).AsSingle();

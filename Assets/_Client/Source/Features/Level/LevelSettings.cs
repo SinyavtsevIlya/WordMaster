@@ -9,5 +9,7 @@ namespace WordMaster
         [field: SerializeField] public Vector2Int WrongCharactersPerStep { get; private set; }
         [field: SerializeField] public int Height { get; private set; }
         [field: SerializeField] public int GenerationOffset { get; private set; }
+        [field: SerializeField] public int GenerationOffsetRandomization { get; private set; }
+        
     }
 }

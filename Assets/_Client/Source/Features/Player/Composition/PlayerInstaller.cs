@@ -11,7 +11,12 @@ namespace WordMaster
             Container.Bind<CompositeDisposable>().AsSingle();
             
             Container.Bind<Player>().AsSingle();
-
+            
+            Container.Bind<Score>()
+                .FromSubContainerResolve()
+                .ByInstaller<ScoreInstaller>()
+                .AsSingle();
+            
             Container.BindInterfacesTo<ReactiveCollection<Word>>().AsSingle();
 
             Container.Bind<Sequence>()

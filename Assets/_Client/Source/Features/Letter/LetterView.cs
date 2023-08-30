@@ -34,5 +34,7 @@ namespace WordMaster
         {
             Destroy(gameObject);
         }
+
+        public float GetWidth() => _textLayers[0].textBounds.size.x;
     }
 }

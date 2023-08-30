@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-using Zenject;
 using UniRx;
 
 namespace WordMaster
 {
-    public class MatchWordRule : IRule, IInitializable
+    public class MatchWordRule : IRule
     {
         private readonly Alphabet _alphabet;
         private readonly Sequence _sequence;
@@ -23,6 +19,7 @@ namespace WordMaster
         public void Initialize()
         {
             _sequence.Value.ObserveAdd()
+                .Where(addEvent => addEvent.Index > 1)
                 .Delay(TimeSpan.FromSeconds(.5f))
                 .Subscribe(_ =>
                 {

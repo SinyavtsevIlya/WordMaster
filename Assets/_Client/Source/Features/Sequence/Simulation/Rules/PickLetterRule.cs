@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using UniRx;
-using Zenject;
 
 namespace WordMaster
 {
-    public class PickLetterRule : IRule, IInitializable
+    public class PickLetterRule : IRule
     {
         private readonly Sequence _sequence;
         private readonly Level _level;

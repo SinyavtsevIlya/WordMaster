@@ -9,6 +9,8 @@ namespace WordMaster
         public char Value { get; }
         public ReactiveProperty<Vector2> Position { get; }
         public float Radius { get; }
+        
+        public float Width { get; set; }
         public CompositeDisposable Disposables { get; }
         
         public Letter(char value, Vector2 position, 
