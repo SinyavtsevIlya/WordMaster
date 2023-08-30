@@ -26,7 +26,7 @@ namespace WordMaster
                 .NonLazy();
 
             Container.Bind<Alphabet>().AsSingle()
-                .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя");
+                .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");
             
             Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
 

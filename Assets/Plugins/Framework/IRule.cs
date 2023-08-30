@@ -35,10 +35,11 @@ public class ClearableReactiveCollection<T> : ReactiveCollection<T>
 
 public static class LinqExtensions
 {
-    private static System.Random rnd = new System.Random();  
+    private static System.Random cachedRandom = new System.Random();  
 
-    public static IList<T> Shuffle<T>(this IList<T> list)  
-    {  
+    public static IList<T> Shuffle<T>(this IList<T> list, System.Random random = null)
+    {
+        var rnd = random ?? cachedRandom;
         var n = list.Count;  
         while (n > 1) {  
             n--;  

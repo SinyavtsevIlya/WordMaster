@@ -26,7 +26,7 @@ namespace WordMaster
                 .ByInstaller<LetterInstaller>()
                 .AsSingle();
 
-            var startLetter = _alphabet.Values[Random.Range(0, _alphabet.Values.Length)];
+            var startLetter = _alphabet.ValidStartValues[Random.Range(0, _alphabet.ValidStartValues.Length)];
             Container.BindInstance(startLetter);
             Container.BindInstance(Vector2.zero);
         }

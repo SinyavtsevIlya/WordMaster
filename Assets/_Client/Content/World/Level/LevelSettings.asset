@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546768db0422418f8f5a8443d8d05396, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
-  CharactersCount: 1
+  <RightCharactersPerStep>k__BackingField: {x: 2, y: 4}
+  <WrongCharactersPerStep>k__BackingField: {x: 1, y: 2}
+  <Height>k__BackingField: 12
+  <GenerationOffset>k__BackingField: 5
