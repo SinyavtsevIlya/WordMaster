@@ -17,6 +17,14 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<ScoreInstaller>()
                 .AsSingle();
+
+            Container.Bind<Energy>().AsSingle();
+            
+            Container.Bind<Canvas>()
+                .FromSubContainerResolve()
+                .ByInstaller<UIInstaller>()
+                .AsSingle()
+                .NonLazy();
             
             Container.BindInterfacesTo<ReactiveCollection<Word>>().AsSingle();
 
@@ -24,7 +32,10 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<SequenceInstaller>()
                 .AsSingle();
-
+            
+            Container.BindRule<AddScoreRule>();
+            
+            Container.BindViewToModel<Score, ScoreWidget>();
             
             Container.BindSubKernel();
         }

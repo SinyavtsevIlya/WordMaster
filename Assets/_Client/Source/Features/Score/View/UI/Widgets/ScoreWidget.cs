@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WordMaster
 {
-    public class ScoreWidget
+    public class ScoreWidget : MonoBehaviour
     {
         [SerializeField] private TMP_Text _scoreLabel;
         

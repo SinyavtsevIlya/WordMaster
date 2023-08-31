@@ -18,6 +18,6 @@ namespace WordMaster
 
         public char[] ValidStartValues => _alphabet.Except(_wordBreakingLetters.ToCharArray()).ToArray();
 
-        public char RandomValue => _alphabet[Random.Range(0, _alphabet.Length)];
+        public char RandomValue => ValidStartValues[Random.Range(0, ValidStartValues.Length)];
     }
 }

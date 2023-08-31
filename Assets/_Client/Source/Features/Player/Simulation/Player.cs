@@ -9,6 +9,10 @@ namespace WordMaster
         public Sequence Sequence { get; }
         public IReactiveCollection<Word> CompletedWords { get; }
         public Score Score { get; }
+        
+        public Energy Energy { get; }
+        public Energy MaxEnergy { get; }
+        
         public CompositeDisposable Disposables { get; }
 
         public float DistancePassed => _camera.transform.position.x;

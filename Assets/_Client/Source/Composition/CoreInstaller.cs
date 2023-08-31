@@ -11,6 +11,7 @@ namespace WordMaster
         [SerializeField] private NodeSettings _nodeSettings;
         [SerializeField] private SequenceSettings _sequenceSettings;
         [SerializeField] private CameraSettings _cameraSettings;
+        [SerializeField] private UISettings _uiSettings;
 
         public override void InstallBindings()
         {
@@ -36,6 +37,7 @@ namespace WordMaster
             Container.BindInstance(_nodeSettings).AsSingle();
             Container.BindInstance(_sequenceSettings).AsSingle();
             Container.BindInstance(_cameraSettings).AsSingle();
+            Container.BindInstance(_uiSettings).AsSingle();
         }
     }
 }

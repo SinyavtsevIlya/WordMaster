@@ -44,6 +44,12 @@ public class Binding<TModel, TView> : IObservable<BindEvent<TModel, TView>>
 
 public static class RuleExtensions
 {
+    public static void BindViewToModel<TModel, TView>(this DiContainer container)
+    {
+        container.Bind<Binding<TModel, TView>>().AsSingle();
+        container.Bind<Subject<BindEvent<TModel, TView>>>().AsSingle();
+    }
+    
     public static void BindRule<TRule>(this DiContainer container, params object[] args) where TRule : IInitializable
     {
         container.BindInterfacesTo<TRule>().AsCached().WithArguments(args);

@@ -1,5 +1,6 @@
 ﻿using System;
 using Rules;
+using Zenject;
 
 namespace WordMaster
 {

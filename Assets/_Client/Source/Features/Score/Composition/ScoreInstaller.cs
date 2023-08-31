@@ -1,4 +1,5 @@
 ﻿using Rules;
+using UniRx;
 using Zenject;
 
 namespace WordMaster
@@ -9,7 +10,7 @@ namespace WordMaster
         {
             Container.Bind<Score>().AsSingle();
             Container.BindRule<ScoreWidgetPresenter>();
-            Container.Bind<Binding<Score, ScoreWidget>>().AsSingle();
+            Container.BindSubKernel();
         }
     }
 }
