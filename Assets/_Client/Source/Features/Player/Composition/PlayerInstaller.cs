@@ -13,13 +13,9 @@ namespace WordMaster
             
             Container.Bind<Player>().AsSingle();
             
-            Container.Bind<Score>()
-                .FromSubContainerResolve()
-                .ByInstaller<ScoreInstaller>()
-                .AsSingle();
+            Container.Bind<Score>().AsSingle();
+            Container.Bind<Energy>().AsSingle().WithArguments(new ReactiveProperty<int>(), new ReactiveProperty<int>());
 
-            Container.Bind<Energy>().AsSingle();
-            
             Container.Bind<Canvas>()
                 .FromSubContainerResolve()
                 .ByInstaller<UIInstaller>()
@@ -34,9 +30,7 @@ namespace WordMaster
                 .AsSingle();
             
             Container.BindRule<AddScoreRule>();
-            
-            Container.BindViewToModel<Score, ScoreWidget>();
-            
+
             Container.BindSubKernel();
         }
     }

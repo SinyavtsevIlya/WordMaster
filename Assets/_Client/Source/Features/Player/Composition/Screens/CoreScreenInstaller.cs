@@ -20,15 +20,21 @@ namespace WordMaster
 
         public override void InstallBindings()
         {
+            Container.BindInstance(_player.Score).AsSingle();
+            Container.BindInstance(_player.Disposables).AsSingle();
+            
             Container.Bind<CoreScreen>()
                 .FromComponentInNewPrefab(_uiSettings.CoreScreen)
                 .UnderTransform(_canvas.transform)
                 .AsSingle();
-
-            Container.BindInstance(_player.Score).AsSingle();
-            Container.BindInstance(_player.Disposables).AsSingle();
-
+            
+            Container.BindRule<ScoreWidgetPresenter>();
+            Container.BindRule<EnergyWidgetPresenter>();
+            
             Container.BindRule<CoreScreenPresenter>();
+            
+            Container.BindViewToModel<Score, ScoreWidget>();
+            Container.BindViewToModel<Energy, EnergyWidget>();
 
             Container.BindSubKernel();
         }

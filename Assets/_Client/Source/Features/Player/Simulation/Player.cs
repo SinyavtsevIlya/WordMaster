@@ -11,8 +11,7 @@ namespace WordMaster
         public Score Score { get; }
         
         public Energy Energy { get; }
-        public Energy MaxEnergy { get; }
-        
+
         public CompositeDisposable Disposables { get; }
 
         public float DistancePassed => _camera.transform.position.x;
@@ -20,13 +19,14 @@ namespace WordMaster
         public Player(Sequence sequence, 
             IReactiveCollection<Word> completedWords, 
             Camera camera, 
-            CompositeDisposable disposables, Score score)
+            CompositeDisposable disposables, Score score, Energy energy)
         {
             _camera = camera;
             Sequence = sequence;
             CompletedWords = completedWords;
             Disposables = disposables;
             Score = score;
+            Energy = energy;
         }
     }
 }
