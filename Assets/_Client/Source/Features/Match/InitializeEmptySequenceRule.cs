@@ -1,8 +1,10 @@
-﻿using UniRx;
+﻿using Rules;
+using UniRx;
+using Zenject;
 
 namespace WordMaster
 {
-    public class InitializeEmptySequenceRule : IRule
+    public class InitializeEmptySequenceRule : IRule, IInitializable
     {
         private readonly Sequence _sequence;
         private readonly Alphabet _alphabet;

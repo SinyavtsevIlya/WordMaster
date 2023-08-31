@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Rules;
+using UnityEngine;
 using Zenject;
 
 namespace WordMaster

@@ -1,9 +1,11 @@
-﻿using UniRx;
+﻿using Rules;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace WordMaster
 {
-    public class InputToHeadTrackingRule : IRule
+    public class InputToHeadTrackingRule : IRule, IInitializable
     {
         private readonly Sequence _sequence;
         private readonly SequenceSettings _settings;

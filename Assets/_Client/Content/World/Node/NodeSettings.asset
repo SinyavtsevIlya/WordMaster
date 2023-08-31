@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NodeSettings
   m_EditorClassIdentifier: 
   VerticalMovementSmoothness: 15
+  LettersSpacing: 0.1

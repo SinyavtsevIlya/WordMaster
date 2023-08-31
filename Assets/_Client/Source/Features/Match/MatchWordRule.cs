@@ -1,9 +1,11 @@
 ﻿using System;
+using Rules;
 using UniRx;
+using Zenject;
 
 namespace WordMaster
 {
-    public class MatchWordRule : IRule
+    public class MatchWordRule : IRule, IInitializable
     {
         private readonly Alphabet _alphabet;
         private readonly Sequence _sequence;

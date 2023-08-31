@@ -1,8 +1,10 @@
-﻿using UniRx;
+﻿using Rules;
+using UniRx;
+using Zenject;
 
 namespace WordMaster
 {
-    public class LetterPresentRule : IRule
+    public class LetterPresentRule : IRule, IInitializable
     {
         private readonly Letter _letter;
         private readonly LetterView _view;

@@ -1,9 +1,11 @@
-﻿using UniRx;
+﻿using Rules;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace WordMaster
 {
-    public class ScrollCameraRule : IRule
+    public class ScrollCameraRule : IRule, IInitializable
     {
         private readonly CameraSettings _settings;
         private readonly Camera _camera;

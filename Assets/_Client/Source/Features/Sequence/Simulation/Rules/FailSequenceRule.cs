@@ -1,9 +1,11 @@
-﻿using UniRx;
+﻿using Rules;
+using UniRx;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace WordMaster
 {
-    public class FailSequenceRule : IRule
+    public class FailSequenceRule : IRule, IInitializable
     {
         private readonly Sequence _sequence;
         private readonly Level _level;

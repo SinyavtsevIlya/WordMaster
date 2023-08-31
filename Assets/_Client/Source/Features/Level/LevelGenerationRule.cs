@@ -1,11 +1,13 @@
 ﻿using System.Linq;
+using Rules;
 using UniRx;
 using UnityEngine;
+using Zenject;
 using Random = System.Random;
 
 namespace WordMaster
 {
-    public class LevelGenerationRule : IRule
+    public class LevelGenerationRule : IRule, IInitializable
     {
         private static readonly System.Random Random = new System.Random();
 

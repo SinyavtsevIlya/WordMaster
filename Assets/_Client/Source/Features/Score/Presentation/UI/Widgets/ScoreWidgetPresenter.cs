@@ -1,10 +1,12 @@
 ﻿using System;
+using Rules;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace WordMaster
 {
-    public class ScoreWidgetPresenter : IRule
+    public class ScoreWidgetPresenter : IRule, IInitializable
     {
         private readonly Binding<Score, ScoreWidget> _scoreBinding;
         private CompositeDisposable _disposables;

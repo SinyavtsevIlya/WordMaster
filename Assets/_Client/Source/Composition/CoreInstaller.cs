@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Rules;
+using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -13,8 +14,6 @@ namespace WordMaster
 
         public override void InstallBindings()
         {
-            Container.BindRulesInitialization();
-            
             Container.Bind<Level>()
                 .FromSubContainerResolve()
                 .ByInstaller<LevelInstaller>()

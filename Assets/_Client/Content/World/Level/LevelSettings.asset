@@ -16,3 +16,4 @@ MonoBehaviour:
   <WrongCharactersPerStep>k__BackingField: {x: 1, y: 2}
   <Height>k__BackingField: 12
   <GenerationOffset>k__BackingField: 5
+  <GenerationOffsetRandomization>k__BackingField: 2

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LetterSettings
   m_EditorClassIdentifier: 
   _viewPrefab: {fileID: 4941663408825362687, guid: 758f6388cc20ca84bbdf882244b41958, type: 3}
-  Size: 0.5
+  Size: 0.4

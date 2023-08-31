@@ -4,25 +4,11 @@ using System.Collections.Generic;
 using UniRx;
 using Zenject;
 
-public interface IRule
+namespace Rules
 {
-    void Initialize();
-}
-
-public class RuleRunner : IInitializable
+    
+public interface IRule : IInitializable
 {
-    private readonly IEnumerable<IRule> _rules;
-
-    public RuleRunner(IEnumerable<IRule> rules)
-    {
-        _rules = rules;
-    }
-
-    public void Initialize()
-    {
-        foreach (var rule in _rules) 
-            rule.Initialize();
-    }
 }
 
 public struct BindEvent<TModel, TView>
@@ -58,14 +44,9 @@ public class Binding<TModel, TView> : IObservable<BindEvent<TModel, TView>>
 
 public static class RuleExtensions
 {
-    public static void BindRule<TRule>(this DiContainer container, params object[] args) where TRule : IRule
+    public static void BindRule<TRule>(this DiContainer container, params object[] args) where TRule : IInitializable
     {
         container.BindInterfacesTo<TRule>().AsCached().WithArguments(args);
-    }
-
-    public static void BindRulesInitialization(this DiContainer container)
-    {
-        container.BindInterfacesTo<RuleRunner>().AsCached().NonLazy();
     }
 }
 
@@ -102,4 +83,5 @@ public static class LinqExtensions
 
         return list;
     }
+}
 }

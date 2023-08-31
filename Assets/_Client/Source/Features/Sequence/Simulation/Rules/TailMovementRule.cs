@@ -1,9 +1,11 @@
-﻿using UniRx;
+﻿using Rules;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace WordMaster
 {
-    public class TailMovementRule : IRule
+    public class TailMovementRule : IRule, IInitializable
     {
         private readonly Node _node;
 
