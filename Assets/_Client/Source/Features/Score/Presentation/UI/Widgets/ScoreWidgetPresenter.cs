@@ -8,23 +8,23 @@ namespace WordMaster
 {
     public class ScoreWidgetPresenter : IRule, IInitializable
     {
-        private readonly Binding<Score, ScoreWidget> _scoreBinding;
-        private CompositeDisposable _disposables;
+        private readonly ScoreWidget _scoreWidget;
+        private readonly Score _score;
+        private readonly CompositeDisposable _disposable;
 
-        public ScoreWidgetPresenter(Binding<Score, ScoreWidget> scoreBinding, CompositeDisposable disposables)
+        public ScoreWidgetPresenter(ScoreWidget scoreWidget, Score score, CompositeDisposable disposable)
         {
-            _scoreBinding = scoreBinding;
-            _disposables = disposables;
+            _scoreWidget = scoreWidget;
+            _score = score;
+            _disposable = disposable;
         }
+
 
         public void Initialize()
         {
-            _scoreBinding.Subscribe(bind =>
-            {
-                bind.Model
-                    .Subscribe(score => bind.View.DisplayScore(score))
-                    .AddTo(bind.Disposables);
-            }).AddTo(_disposables);
+            _score
+                .Subscribe(score => _scoreWidget.DisplayScore(score))
+                .AddTo(_disposable);
         }
     }
 }

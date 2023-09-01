@@ -16,9 +16,9 @@ namespace WordMaster
         {
             Container.Bind<Canvas>().FromComponentInNewPrefab(_uiSettings.CanvasPrefab).AsSingle();
 
-            Container.Bind<CoreScreen>()
+            Container.Bind<CoreScreenPresenter>()
                 .FromSubContainerResolve()
-                .ByInstaller<CoreScreenInstaller>()
+                .ByInstaller<ScreensInstaller>()
                 .AsSingle()
                 .NonLazy();
         }
