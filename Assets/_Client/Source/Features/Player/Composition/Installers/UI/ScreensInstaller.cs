@@ -24,7 +24,7 @@ namespace WordMaster
                     .AsSingle();
             }
 
-            Container.Bind<int>()
+            Container.Bind<CoreScreenPresenter>()
                 .FromSubContainerResolve()
                 .ByInstaller<CoreScreenInstaller>()
                 .AsSingle()

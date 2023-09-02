@@ -7,6 +7,13 @@ namespace WordMaster
 {
     public class PlayerInstaller : Installer<PlayerInstaller>
     {
+        private readonly EnergySettings _energySettings;
+
+        public PlayerInstaller(EnergySettings energySettings)
+        {
+            _energySettings = energySettings;
+        }
+
         public override void InstallBindings()
         {
             Container.Bind<CompositeDisposable>().AsSingle();
@@ -14,7 +21,10 @@ namespace WordMaster
             Container.Bind<Player>().AsSingle();
             
             Container.Bind<Score>().AsSingle();
-            Container.Bind<Energy>().AsSingle().WithArguments(new ReactiveProperty<int>(), new ReactiveProperty<int>());
+            Container.Bind<Energy>().AsSingle()
+                .WithArguments(
+                    new ReactiveProperty<float>(_energySettings.InitialEnergyAmount),
+                    new ReactiveProperty<float>(_energySettings.InitialEnergyAmount));
 
             Container.Bind<Canvas>()
                 .FromSubContainerResolve()
@@ -30,6 +40,8 @@ namespace WordMaster
                 .AsSingle();
             
             Container.BindRule<AddScoreRule>();
+            Container.BindRule<AddEnergyForScoreRule>();
+            Container.BindRule<LossEnergyRule>();
 
             Container.BindSubKernel();
         }

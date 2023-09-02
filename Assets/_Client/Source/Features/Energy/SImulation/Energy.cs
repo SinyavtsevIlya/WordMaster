@@ -4,10 +4,10 @@ namespace WordMaster
 {
     public class Energy
     {
-        public IReactiveProperty<int> Current { get; }
-        public IReactiveProperty<int> Max { get; }
+        public IReactiveProperty<float> Current { get; }
+        public IReactiveProperty<float> Max { get; }
 
-        public Energy(IReactiveProperty<int> current, IReactiveProperty<int> max)
+        public Energy(IReactiveProperty<float> current, IReactiveProperty<float> max)
         {
             Current = current;
             Max = max;

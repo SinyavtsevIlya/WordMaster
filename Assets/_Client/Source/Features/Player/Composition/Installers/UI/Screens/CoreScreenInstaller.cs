@@ -1,5 +1,4 @@
 ﻿using Rules;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -27,7 +26,9 @@ namespace WordMaster
                 .AsCached()
                 .WithArguments(_player.Score, _coreScreen.ScoreWidget);
             
-            Container.BindRule<EnergyWidgetPresenter>();
+            Container.BindInterfacesTo<EnergyWidgetPresenter>()
+                .AsCached()
+                .WithArguments(_player.Energy, _coreScreen.EnergyWidget);
             
             Container.BindRule<CoreScreenPresenter>();
 
