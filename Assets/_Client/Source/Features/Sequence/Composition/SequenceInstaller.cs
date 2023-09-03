@@ -29,6 +29,7 @@ namespace WordMaster
             Container.BindRule<FailSequenceRule>();
             Container.BindRule<InitializeEmptySequenceRule>();
             Container.BindRule<InputToHeadTrackingRule>();
+            Container.BindRule<TailMovementRule>();
 
             Container.Bind<Node>()
                 .FromSubContainerResolve()

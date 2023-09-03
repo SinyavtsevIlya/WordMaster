@@ -17,7 +17,6 @@ namespace WordMaster
         {
             Container.Bind<Node>().AsSingle();
             Container.BindInstance(_letter);
-            Container.BindRule<TailMovementRule>();
             Container.BindSubKernel();
         }
     }

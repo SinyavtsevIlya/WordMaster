@@ -1,6 +1,7 @@
 ﻿using Rules;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace WordMaster
@@ -21,7 +22,10 @@ namespace WordMaster
         public void Initialize()
         {
             Observable.EveryUpdate()
-                .Subscribe(_ => _energy.Current.Value -= Time.deltaTime * _energySettings.LossPerSecond)
+                .Subscribe(_ =>
+                {
+                    _energy.Current.Value -= Time.deltaTime * _energySettings.LossPerSecond;
+                })
                 .AddTo(_disposables);
         }
     }

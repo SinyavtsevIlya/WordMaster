@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9bf59826ad41acaabaf5303f0f1772, type: 3}
   m_Name: EnergySettings
   m_EditorClassIdentifier: 
-  LossPerSecond: 0
-  RecoveryPerScorePoint: 0
+  LossPerSecond: 2
+  RecoveryPerScorePoint: 3
+  InitialEnergyAmount: 50

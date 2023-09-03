@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: UISettings
   m_EditorClassIdentifier: 
   CanvasPrefab: {fileID: 6635559879734868024, guid: 921bfcea0a3148649abf2ba76e02910e, type: 3}
-  Screens: []
+  Screens:
+  - {fileID: 7633732641962240988, guid: d407b287038e40a4994d38871ebf479a, type: 3}
   CoreScreen: {fileID: 7633732641962240988, guid: d407b287038e40a4994d38871ebf479a, type: 3}

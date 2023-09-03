@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ad3cff43624a73b8fa292e528f8d1e, type: 3}
   m_Name: CameraSettings
   m_EditorClassIdentifier: 
-  ScrollSpeed: 7.5
+  ScrollSpeed: 5
   Prefab: {fileID: 6788189340268356688, guid: 98ed6337078e5c74c9462e9e594627cf, type: 3}
   CompletenessToSpeedup:
     serializedVersion: 2
