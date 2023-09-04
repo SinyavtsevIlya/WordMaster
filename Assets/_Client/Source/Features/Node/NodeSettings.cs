@@ -7,5 +7,6 @@ namespace WordMaster
     {
         public float VerticalMovementSmoothness;
         public float LettersSpacing;
+        public NodeView NodePrefab;
     }
 }

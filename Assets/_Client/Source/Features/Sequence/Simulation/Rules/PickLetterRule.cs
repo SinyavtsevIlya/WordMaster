@@ -26,6 +26,8 @@ namespace WordMaster
 
                 if (TryGetCollision(_level, head, out var collisionLetter))
                 {
+                    collisionLetter.IsPicked.Value = true;
+                    
                     var prevHead = _sequence.Value.Last();
                     var newHead = _nodeFactory.Create(collisionLetter);
                     

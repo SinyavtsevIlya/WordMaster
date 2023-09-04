@@ -14,6 +14,8 @@ namespace WordMaster
         [SerializeField] private UISettings _uiSettings;
         [SerializeField] private EnergySettings _energySettings;
 
+        [SerializeField] private ScriptableObject[] _settings;
+
         public override void InstallBindings()
         {
             Container.Bind<Level>()
@@ -32,14 +34,9 @@ namespace WordMaster
                 .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");
             
             Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
-            
-            Container.BindInstance(_levelSettings).AsSingle();
-            Container.BindInstance(_letterSettings).AsSingle();
-            Container.BindInstance(_nodeSettings).AsSingle();
-            Container.BindInstance(_sequenceSettings).AsSingle();
-            Container.BindInstance(_cameraSettings).AsSingle();
-            Container.BindInstance(_uiSettings).AsSingle();
-            Container.BindInstance(_energySettings).AsSingle();
+
+            foreach (var s in _settings) 
+                Container.Bind(s.GetType()).FromInstance(s).AsSingle();
         }
     }
 }

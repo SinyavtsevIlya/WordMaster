@@ -11,6 +11,9 @@ namespace WordMaster
         public float Radius { get; }
         
         public float Width { get; set; }
+        
+        public ReactiveProperty<bool> IsPicked { get; }
+
         public CompositeDisposable Disposables { get; }
         
         public Letter(char value, Vector2 position, 
@@ -18,6 +21,7 @@ namespace WordMaster
         {
             Value = value;
             Position = new ReactiveProperty<Vector2>(position);
+            IsPicked = new ReactiveProperty<bool>();
             Radius = radius;
             Disposables = disposables;
         }

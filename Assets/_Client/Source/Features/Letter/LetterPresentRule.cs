@@ -23,6 +23,8 @@ namespace WordMaster
 
             var completion = Disposable.Create(() => _view.PlayCompletion());
             completion.AddTo(_letter.Disposables);
+
+            _letter.IsPicked.Where(isTrue => isTrue).Subscribe(_ => _view.SetAsPicked()).AddTo(_letter.Disposables);
         }
     }
 }

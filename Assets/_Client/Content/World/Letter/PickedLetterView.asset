@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82631601e1d34d23bd12b12a5f0628df, type: 3}
-  m_Name: LetterViewSettings
+  m_Name: PickedLetterView
   m_EditorClassIdentifier: 
   _gradient:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 0, a: 1}
-    key1: {r: 0.8773585, g: 0.33539402, b: 0.2027857, a: 1}
-    key2: {r: 0.9245283, g: 0.27577597, b: 0.11774653, a: 0}
-    key3: {r: 1, g: 0.9490197, b: 0.627451, a: 0}
+    key1: {r: 0.20392157, g: 0.2988115, b: 0.8784314, a: 1}
+    key2: {r: 0.11764706, g: 0.43523622, b: 0.9254902, a: 0}
+    key3: {r: 0.10849059, g: 0.96320844, b: 1, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}

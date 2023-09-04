@@ -1,5 +1,6 @@
 ﻿using System;
 using UniRx;
+using UnityEngine;
 
 namespace WordMaster
 {
@@ -14,7 +15,7 @@ namespace WordMaster
         public ReactiveProperty<Node> Prev { get; }
 
         public CompositeDisposable Disposables => Letter.Disposables;
-        
+
         public Node(Letter letter, NodeSettings settings)
         {
             Letter = letter ?? throw new ArgumentNullException(nameof(letter));

@@ -22,7 +22,7 @@ namespace WordMaster
         {
             _sequence.Value.ObserveAdd()
                 .Where(addEvent => addEvent.Index > 1)
-                .Delay(TimeSpan.FromSeconds(.5f))
+                .Throttle(TimeSpan.FromSeconds(1f))
                 .Subscribe(_ =>
                 {
                     if (_trie.Search(_sequence.ToString(), out var _, out var isEndOfTheWord))

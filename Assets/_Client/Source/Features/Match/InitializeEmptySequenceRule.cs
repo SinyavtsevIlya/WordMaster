@@ -33,6 +33,9 @@ namespace WordMaster
 
             _sequence.Value.ObserveAdd().Subscribe(addEvent =>
             {
+                if (addEvent.Index == 0)
+                    addEvent.Value.Letter.IsPicked.Value = true;
+                
                 addEvent.Value.AddTo(_sequence.Disposables);
                 addEvent.Value.Letter.AddTo(_sequence.Disposables);
             }).AddTo(_sequence.Disposables);

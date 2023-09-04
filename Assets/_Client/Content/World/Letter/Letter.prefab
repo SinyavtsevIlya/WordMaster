@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 1625372888875826685}
   - {fileID: 1176813247557727230}
   _settings: {fileID: 11400000, guid: 447dd82d0778c524eb302b88731adb65, type: 2}
+  _pickedStateSettings: {fileID: 11400000, guid: a58ab9aeab5dc9341a83cada6b55e748, type: 2}
 --- !u!1 &2578016146712482694
 GameObject:
   m_ObjectHideFlags: 0

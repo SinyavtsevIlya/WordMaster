@@ -23,6 +23,7 @@ namespace WordMaster
             Head = Value.ObserveAdd().Select(e => e.Value).ToReadOnlyReactiveProperty();
             Disposables = disposables;
             value.Add(head);
+            head.Letter.IsPicked.Value = true;
             Completed = new Subject<IReactiveCollection<Node>>();
             Failed = new Subject<IReactiveCollection<Node>>();
         }
