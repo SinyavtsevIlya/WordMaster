@@ -16,7 +16,7 @@ namespace WordMaster
         public void SetCharacter(char character)
         {
             foreach (var text in _textLayers) 
-                text.SetText(character.ToString());
+                text.SetText(character.ToString().ToUpper());
         }
 
         public void PlayCompletion()

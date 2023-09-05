@@ -18,7 +18,7 @@ namespace WordMaster
         
         public void SetPosition(Vector2 position)
         {
-            _root.position = new Vector3(position.x, position.y, _root.position.z);
+            transform.position = new Vector3(position.x, position.y, transform.position.z);
         }
 
         public void Dispose()
