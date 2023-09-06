@@ -1,4 +1,5 @@
 ﻿using Rules;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -23,7 +24,7 @@ namespace WordMaster
             Container.Bind<NodeView>()
                 .FromComponentInNewPrefab(_settings.NodePrefab)
                 .AsSingle();
-            
+
             Container.BindRule<NodePresentRule>();
 
             Container.BindSubKernel();

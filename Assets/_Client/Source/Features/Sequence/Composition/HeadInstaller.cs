@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -25,7 +26,7 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<LetterInstaller>()
                 .AsSingle();
-
+            
             var startLetter = _alphabet.ValidStartValues[Random.Range(0, _alphabet.ValidStartValues.Length)];
             Container.BindInstance(startLetter);
             Container.BindInstance(Vector2.zero);

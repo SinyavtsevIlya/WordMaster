@@ -20,11 +20,8 @@ namespace WordMaster
             _view.SetCharacter(_letter.Value);
             Observable.EveryUpdate().Subscribe(_ => _letter.Width = _view.GetWidth());
             _letter.Position.Subscribe(_view.SetPosition).AddTo(_letter.Disposables);
-
-            var completion = Disposable.Create(() => _view.PlayCompletion());
-            completion.AddTo(_letter.Disposables);
-
             _letter.IsPicked.Where(isTrue => isTrue).Subscribe(_ => _view.SetAsPicked()).AddTo(_letter.Disposables);
+            _letter.IsMatched.Subscribe(_view.SetMatchState).AddTo(_letter.Disposables);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace WordMaster
                 .AsSingle();
             
             Container.BindRule<LevelGenerationRule>();
+            Container.BindRule<RestartLevelOnZeroEnergyRule>();
             Container.BindRule<ScrollCameraRule>();
             
             Container.BindSubKernel();

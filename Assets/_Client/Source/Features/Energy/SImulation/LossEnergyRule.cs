@@ -22,10 +22,7 @@ namespace WordMaster
         public void Initialize()
         {
             Observable.EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    _energy.Current.Value -= Time.deltaTime * _energySettings.LossPerSecond;
-                })
+                .Subscribe(_ => _energy.Current.Value -= Time.deltaTime * _energySettings.LossPerSecond)
                 .AddTo(_disposables);
         }
     }

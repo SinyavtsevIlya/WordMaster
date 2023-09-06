@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
 
 namespace WordMaster
 {
-    public class LetterView : MonoBehaviour
+    public class LetterView : MonoBehaviour, IDisposable
     {
         [SerializeField] private TMPro.TMP_Text[] _textLayers;
         [SerializeField] private LetterViewSettings _settings;
         [SerializeField] private LetterViewSettings _pickedStateSettings;
+        
+        [SerializeField] private Color _matchedColor;
+        [SerializeField] private Color _failedColor;
+        [SerializeField] private Ease _ease;
+        [SerializeField] private float _duration;
+        [SerializeField] private float _endValue;
         
         public void SetPosition(Vector2 position)
         {
@@ -18,8 +26,16 @@ namespace WordMaster
             foreach (var text in _textLayers) 
                 text.SetText(character.ToString().ToUpper());
         }
+        
+        public void SetMatchState(bool isMatched)
+        {
+            foreach (var text in _textLayers) 
+                text.color = isMatched ? _matchedColor : _failedColor;
+            
+            gameObject.transform.DOScale(_endValue, _duration).SetEase(_ease).OnComplete(Dispose);
+        }
 
-        public void PlayCompletion()
+        public void Dispose()
         {
             Destroy(gameObject);
         }

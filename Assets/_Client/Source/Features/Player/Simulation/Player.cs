@@ -1,9 +1,10 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 
 namespace WordMaster
 {
-    public class Player
+    public class Player : IDisposable
     {
         private readonly Camera _camera;
         public Sequence Sequence { get; }
@@ -27,6 +28,13 @@ namespace WordMaster
             Disposables = disposables;
             Score = score;
             Energy = energy;
+        }
+
+        public void Dispose()
+        {
+            Sequence?.Dispose();
+            Score?.Dispose();
+            Disposables?.Dispose();
         }
     }
 }

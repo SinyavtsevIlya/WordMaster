@@ -26,7 +26,7 @@ namespace WordMaster
             
             Container.BindRule<PickLetterRule>();
             Container.BindRule<MatchWordRule>();
-            Container.BindRule<FailSequenceRule>();
+            Container.BindRule<CompleteLettersRule>();
             Container.BindRule<InitializeEmptySequenceRule>();
             Container.BindRule<InputToHeadTrackingRule>();
             Container.BindRule<TailMovementRule>();
@@ -35,7 +35,7 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<HeadInstaller>()
                 .AsSingle();
-
+            
             Container.BindSubKernel();
         }
     }

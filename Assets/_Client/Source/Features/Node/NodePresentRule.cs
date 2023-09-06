@@ -21,7 +21,7 @@ namespace WordMaster
         {
             _node.Letter.Position.Subscribe(_nodeView.SetPosition).AddTo(_node.Disposables);
             _nodeView.Appear();
-            _nodeView.AddTo(_node.Disposables);
+            _node.IsMatched.Subscribe(_nodeView.SetMatchState).AddTo(_node.Disposables);
         }
     }
 }

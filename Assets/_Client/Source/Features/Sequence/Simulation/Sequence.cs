@@ -42,12 +42,18 @@ namespace WordMaster
     {
         public static void Complete(this Sequence sequence)
         {
+            foreach (var node in sequence.Value)
+                node.IsMatched.OnNext(true);
+            
             sequence.Completed.OnNext(sequence.Value);
             sequence.Value.Clear();
         }
 
         public static void Fail(this Sequence sequence)
         {
+            foreach (var node in sequence.Value)
+                node.IsMatched.OnNext(false);
+            
             sequence.Failed.OnNext(sequence.Value);
             sequence.Value.Clear();
         }

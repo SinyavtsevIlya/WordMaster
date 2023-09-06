@@ -15,13 +15,16 @@ namespace WordMaster
         public ReactiveProperty<Node> Prev { get; }
 
         public CompositeDisposable Disposables => Letter.Disposables;
+        
+        public Subject<bool> IsMatched { get; }
 
         public Node(Letter letter, NodeSettings settings)
         {
-            Letter = letter ?? throw new ArgumentNullException(nameof(letter));
+            Letter = letter;
             Settings = settings;
             Prev = new ReactiveProperty<Node>();
             Next = new ReactiveProperty<Node>();
+            IsMatched = new Subject<bool>();
         }
 
         public void Dispose()

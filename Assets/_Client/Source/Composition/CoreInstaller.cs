@@ -1,4 +1,5 @@
 ﻿using Rules;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -6,14 +7,7 @@ namespace WordMaster
 {
     public class CoreInstaller : MonoInstaller<CoreInstaller>
     {
-        [SerializeField] private LevelSettings _levelSettings;
-        [SerializeField] private LetterSettings _letterSettings;
-        [SerializeField] private NodeSettings _nodeSettings;
-        [SerializeField] private SequenceSettings _sequenceSettings;
         [SerializeField] private CameraSettings _cameraSettings;
-        [SerializeField] private UISettings _uiSettings;
-        [SerializeField] private EnergySettings _energySettings;
-
         [SerializeField] private ScriptableObject[] _settings;
 
         public override void InstallBindings()
@@ -34,7 +28,7 @@ namespace WordMaster
                 .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");
             
             Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
-
+            
             foreach (var s in _settings) 
                 Container.Bind(s.GetType()).FromInstance(s).AsSingle();
         }

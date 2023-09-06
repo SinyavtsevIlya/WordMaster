@@ -70,7 +70,9 @@ namespace WordMaster
                     var randomization = Random.Next(-randomizationRange, randomizationRange);
                     var position = new Vector2(horizontalPosition + _level.Settings.GenerationOffset + randomization, letterPlacements[index]);
                     var letter = _letterFactory.Create(variant, position);
+                    
                     _level.Letters.Add(letter);
+                    letter.AddTo(_level.Disposables);
                 }
             }
         }

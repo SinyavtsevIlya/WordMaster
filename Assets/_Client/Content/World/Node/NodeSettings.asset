@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NodeSettings
   m_EditorClassIdentifier: 
   VerticalMovementSmoothness: 8
-  LettersSpacing: 0.1
+  LettersSpacing: 0.25
   NodePrefab: {fileID: 8303805917836479550, guid: d5bacddcad334644bb9c4fb7c4da4242, type: 3}
