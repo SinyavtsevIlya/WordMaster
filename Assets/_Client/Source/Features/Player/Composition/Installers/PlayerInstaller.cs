@@ -26,9 +26,15 @@ namespace WordMaster
                     new ReactiveProperty<float>(_energySettings.InitialEnergyAmount),
                     new ReactiveProperty<float>(_energySettings.InitialEnergyAmount));
 
-            Container.Bind<Canvas>()
+            Container.Bind<CoreScreen>()
                 .FromSubContainerResolve()
                 .ByInstaller<UIInstaller>()
+                .AsSingle()
+                .NonLazy();
+            
+            Container.Bind(typeof(CoreScreenPresenter), typeof(IFlowTarget))
+                .FromSubContainerResolve()
+                .ByInstaller<CoreScreenInstaller>()
                 .AsSingle()
                 .NonLazy();
             
@@ -38,7 +44,7 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<SequenceInstaller>()
                 .AsSingle();
-            
+
             Container.BindRule<AddScoreRule>();
             Container.BindRule<AddEnergyForScoreRule>();
             Container.BindRule<LossEnergyRule>();

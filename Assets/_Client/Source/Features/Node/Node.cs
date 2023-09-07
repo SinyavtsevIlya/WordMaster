@@ -30,6 +30,7 @@ namespace WordMaster
         public void Dispose()
         {
             Disposables.Dispose();
+            Letter.Dispose();
         }
     }
 }

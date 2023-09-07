@@ -35,12 +35,6 @@ namespace WordMaster
                         _sequence.Fail();
                     }
                 }).AddTo(_sequence.Disposables);
-
-            _sequence.Value.ObserveRemove()
-                .Subscribe(resetEvent => resetEvent.Value.Dispose())
-                .AddTo(_sequence.Disposables);
-            
-            
         }
     }
 }

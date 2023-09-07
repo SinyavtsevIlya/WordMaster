@@ -15,6 +15,8 @@ namespace WordMaster
         [SerializeField] private Ease _ease;
         [SerializeField] private float _duration;
         [SerializeField] private float _endValue;
+
+        private IFlowTarget _flowTarget;
         
         public void SetPosition(Vector2 position)
         {
@@ -26,13 +28,28 @@ namespace WordMaster
             foreach (var text in _textLayers) 
                 text.SetText(character.ToString().ToUpper());
         }
+
+        public void SetFlowTarget(IFlowTarget flowTarget) => _flowTarget = flowTarget;
         
         public void SetMatchState(bool isMatched)
         {
             foreach (var text in _textLayers) 
                 text.color = isMatched ? _matchedColor : _failedColor;
-            
-            gameObject.transform.DOScale(_endValue, _duration).SetEase(_ease).OnComplete(Dispose);
+
+            if (isMatched)
+            {
+                gameObject.transform
+                    .DOMove(_flowTarget.GetTargetPosition(), 1f).SetEase(Ease.InExpo)
+                    .OnComplete(() =>
+                    {
+                        _flowTarget.SetFlowCompleted();
+                        Dispose();
+                    });
+            }
+            else
+            {
+                gameObject.transform.DOScale(_endValue, _duration).SetEase(_ease).OnComplete(Dispose);
+            }
         }
 
         public void Dispose()

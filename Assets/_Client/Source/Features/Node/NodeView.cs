@@ -14,10 +14,12 @@ namespace WordMaster
         [SerializeField] private Color _matchedColor;
         [SerializeField] private Color _failedColor;
 
+        [SerializeField] private NodeViewSettings _settings;
+
         public void Appear()
         {
             _root.localScale = Vector3.one * .3f; 
-            _root.DOScale(1f, .8f).SetEase(_ease);
+            _root.DOScale(1f, _settings.AppearDuration).SetEase(_settings.AppearEase);
         }
         
         public void SetPosition(Vector2 position)
@@ -27,8 +29,9 @@ namespace WordMaster
 
         public void SetMatchState(bool isMatched)
         {
-            _sprite.color = isMatched ? _matchedColor : _failedColor;
-            _root.DOScale(0f, 1f).SetEase(_ease).OnComplete(Dispose);
+            _sprite.color = isMatched ? _settings.MatchedColor : _settings.FailedColor;
+            _sprite.DOColor(Color.clear, _settings.ColorDuration).SetDelay(.1f);
+            _root.DOScale(_settings.ScaleEndValue, _settings.ScaleDuration).SetEase(_settings.ScaleEase).OnComplete(Dispose);
         }
 
         public void Dispose()

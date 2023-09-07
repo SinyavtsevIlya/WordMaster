@@ -37,14 +37,7 @@ namespace WordMaster
                     addEvent.Value.Letter.IsPicked.Value = true;
                 
                 addEvent.Value.AddTo(_sequence.Disposables);
-                addEvent.Value.Letter.AddTo(_sequence.Disposables);
             }).AddTo(_sequence.Disposables);
-            
-            _sequence.Value.ObserveRemove()
-                .Subscribe(removeEvent =>
-                {
-                    removeEvent.Value.Dispose();
-                }).AddTo(_sequence.Disposables);
         }
     }
 }

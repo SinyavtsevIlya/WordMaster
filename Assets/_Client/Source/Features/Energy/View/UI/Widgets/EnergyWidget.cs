@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace WordMaster
 {
-    public class EnergyWidget : MonoBehaviour
+    public class EnergyWidget : MonoBehaviour, IFlowTarget
     {
         [SerializeField] private Image _energyBar;
         [SerializeField] private TMP_Text _energyLabel;
@@ -17,6 +17,18 @@ namespace WordMaster
             
             _energyBar.fillAmount = current / max;
             _energyLabel.SetText($"{(int)current}/{(int)max}");
-        } 
+        }
+
+        public Vector3 GetTargetPosition()
+        {
+            var sizeDeltaX = _energyBar.rectTransform.rect.width;
+            var deltaX = Vector3.right * sizeDeltaX;
+            return _energyBar.transform.position - deltaX + deltaX * _energyBar.fillAmount;
+        }
+
+        public void SetFlowCompleted()
+        {
+            
+        }
     }
 }

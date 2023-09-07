@@ -23,12 +23,6 @@ namespace WordMaster
                     .UnderTransform(_canvas.transform)
                     .AsSingle();
             }
-
-            Container.Bind<CoreScreenPresenter>()
-                .FromSubContainerResolve()
-                .ByInstaller<CoreScreenInstaller>()
-                .AsSingle()
-                .NonLazy();
         }
     }
 }

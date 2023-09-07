@@ -18,11 +18,12 @@ namespace WordMaster
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<Player>()
+            Container.Bind(typeof(Player), typeof(IFlowTarget))
                 .FromSubContainerResolve()
                 .ByInstaller<PlayerInstaller>()
                 .AsSingle()
                 .NonLazy();
+            
 
             Container.Bind<Alphabet>().AsSingle()
                 .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");

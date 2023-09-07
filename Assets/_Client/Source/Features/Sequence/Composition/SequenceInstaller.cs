@@ -35,7 +35,7 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<HeadInstaller>()
                 .AsSingle();
-            
+
             Container.BindSubKernel();
         }
     }

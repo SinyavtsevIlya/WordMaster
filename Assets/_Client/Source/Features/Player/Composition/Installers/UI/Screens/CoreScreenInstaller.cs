@@ -1,4 +1,5 @@
 ﻿using Rules;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -7,32 +8,33 @@ namespace WordMaster
     public class CoreScreenInstaller : Installer<CoreScreenInstaller>
     {
         private readonly CoreScreen _coreScreen;
-        private readonly Player _player;
-        private readonly Canvas _canvas;
+        private readonly CompositeDisposable _disposables;
+        private readonly Score _score;
+        private readonly Energy _energy;
 
-        public CoreScreenInstaller(CoreScreen coreScreen, Player player, Canvas canvas)
+        public CoreScreenInstaller(CoreScreen coreScreen, CompositeDisposable disposables, Score score, Energy energy)
         {
-            _player = player;
-            _canvas = canvas;
             _coreScreen = coreScreen;
+            _disposables = disposables;
+            _score = score;
+            _energy = energy;
         }
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_player.Score).AsSingle();
-            Container.BindInstance(_player.Disposables).AsSingle();
+            Container.BindInstance(_disposables).AsSingle();
 
             Container.BindInterfacesTo<ScoreWidgetPresenter>()
                 .AsCached()
-                .WithArguments(_player.Score, _coreScreen.ScoreWidget);
+                .WithArguments(_score, _coreScreen.ScoreWidget);
             
             Container.BindInterfacesTo<EnergyWidgetPresenter>()
                 .AsCached()
-                .WithArguments(_player.Energy, _coreScreen.EnergyWidget);
+                .WithArguments(_energy, _coreScreen.EnergyWidget);
             
             Container.BindRule<CoreScreenPresenter>();
-
-            Container.BindInstance(0).AsSingle();
+            
+            Container.Bind<IFlowTarget>().FromInstance(_coreScreen.EnergyWidget).AsSingle();
 
             Container.BindSubKernel();
         }

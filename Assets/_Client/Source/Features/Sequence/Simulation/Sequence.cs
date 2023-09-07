@@ -42,9 +42,17 @@ namespace WordMaster
     {
         public static void Complete(this Sequence sequence)
         {
-            foreach (var node in sequence.Value)
-                node.IsMatched.OnNext(true);
-            
+            for (var index = 0; index < sequence.Value.Count; index++)
+            {
+                var capturedIndex = index;
+                var node = sequence.Value[capturedIndex];
+                Observable.Timer(TimeSpan.FromSeconds(capturedIndex * .05f)).Subscribe(_ =>
+                {
+                    node.IsMatched.OnNext(true);
+                    node.Letter.IsMatched.OnNext(true);
+                });
+            }
+
             sequence.Completed.OnNext(sequence.Value);
             sequence.Value.Clear();
         }
