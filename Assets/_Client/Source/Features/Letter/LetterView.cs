@@ -7,6 +7,7 @@ namespace WordMaster
     public class LetterView : MonoBehaviour, IDisposable
     {
         [SerializeField] private TMPro.TMP_Text[] _textLayers;
+        [SerializeField] private GameObject _shadow;
         [SerializeField] private LetterViewSettings _settings;
         [SerializeField] private LetterViewSettings _pickedStateSettings;
         
@@ -60,6 +61,7 @@ namespace WordMaster
         public void SetAsPicked()
         {
             Colorize(_pickedStateSettings);
+            _shadow.SetActive(false);
         }
 
         public float GetWidth() => _textLayers[0].textBounds.size.x;

@@ -213,8 +213,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241330205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.15}
-  m_LocalScale: {x: 1000, y: 1000, z: 1}
+  m_LocalPosition: {x: 0, y: 6.8, z: 0.15}
+  m_LocalScale: {x: 800, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -348,13 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de91c25fca5f4b84a1d0f2a760133175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSettings: {fileID: 11400000, guid: 8d852b8896351204c81f09cec08698ea, type: 2}
-  _letterSettings: {fileID: 11400000, guid: 5f51c13a9cd978e4c804990396e98544, type: 2}
-  _nodeSettings: {fileID: 11400000, guid: 05c498529ccdfaf4fa8da01165ec21a6, type: 2}
-  _sequenceSettings: {fileID: 11400000, guid: d726e8dc7a0ad454ca73009fd0293ff9, type: 2}
   _cameraSettings: {fileID: 11400000, guid: be141a2c2999f3447b8fcd661a1ca7b5, type: 2}
-  _uiSettings: {fileID: 11400000, guid: e603bc41a5c4f6645aefc037977d85d3, type: 2}
-  _energySettings: {fileID: 11400000, guid: 5fb6f4eaea47b934f8433e62da765dc0, type: 2}
   _settings:
   - {fileID: 11400000, guid: 8d852b8896351204c81f09cec08698ea, type: 2}
   - {fileID: 11400000, guid: 5f51c13a9cd978e4c804990396e98544, type: 2}
