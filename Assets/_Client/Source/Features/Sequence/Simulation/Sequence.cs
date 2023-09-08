@@ -44,13 +44,12 @@ namespace WordMaster
         {
             for (var index = 0; index < sequence.Value.Count; index++)
             {
-                var capturedIndex = index;
-                var node = sequence.Value[capturedIndex];
-                Observable.Timer(TimeSpan.FromSeconds(capturedIndex * .05f)).Subscribe(_ =>
+                var node = sequence.Value[index];
+                Observable.Timer(TimeSpan.FromSeconds(index * .05f)).Subscribe(_ =>
                 {
                     node.IsMatched.OnNext(true);
                     node.Letter.IsMatched.OnNext(true);
-                });
+                }).AddTo(sequence.Disposables);
             }
 
             sequence.Completed.OnNext(sequence.Value);
@@ -59,8 +58,15 @@ namespace WordMaster
 
         public static void Fail(this Sequence sequence)
         {
-            foreach (var node in sequence.Value)
-                node.IsMatched.OnNext(false);
+            for (var index = 0; index < sequence.Value.Count; index++)
+            {
+                var node = sequence.Value[index];
+                Observable.Timer(TimeSpan.FromSeconds(index * .05f)).Subscribe(_ =>
+                {
+                    node.IsMatched.OnNext(false);
+                    node.Letter.IsMatched.OnNext(false);
+                }).AddTo(sequence.Disposables);
+            }
             
             sequence.Failed.OnNext(sequence.Value);
             sequence.Value.Clear();

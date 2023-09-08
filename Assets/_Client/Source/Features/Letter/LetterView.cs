@@ -80,5 +80,10 @@ namespace WordMaster
             var normalizedValue = (float)index / _textLayers.Length;
             _textLayers[index].color = settings.EvaluateColor(normalizedValue);
         }
+
+        public void RandomizeRotation()
+        {
+            transform.Rotate(Vector3.forward, UnityEngine.Random.Range(-7, 7));
+        }
     }
 }
