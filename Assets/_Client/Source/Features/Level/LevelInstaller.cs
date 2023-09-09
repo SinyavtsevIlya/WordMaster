@@ -18,8 +18,19 @@ namespace WordMaster
                 .FromSubContainerResolve()
                 .ByInstaller<LetterInstaller>()
                 .AsSingle();
+
+            Container.BindFactory<DistanceMarkerView, DistanceMarkerFactory>()
+                .FromSubContainerResolve()
+                .ByInstaller<DistanceMarkerInstaller>()
+                .AsSingle();
             
+            Container.BindFactory<BestDistanceMarkerView, BestDistanceMarkerFactory>()
+                .FromSubContainerResolve()
+                .ByInstaller<BestDistanceMarkerInstaller>()
+                .AsSingle();
+
             Container.BindRule<LevelGenerationRule>();
+            Container.BindRule<DistanceMarkerGenerationRule>();
             Container.BindRule<RestartLevelOnZeroEnergyRule>();
             Container.BindRule<ScrollCameraRule>();
             

@@ -10,6 +10,11 @@ namespace WordMaster
         [SerializeField] private CameraSettings _cameraSettings;
         [SerializeField] private ScriptableObject[] _settings;
 
+        private PlayerSerializationState _playerSerializationState;
+
+        public void SetPlayerSerializationState(PlayerSerializationState playerSerializationState) =>
+            _playerSerializationState = playerSerializationState;
+
         public override void InstallBindings()
         {
             Container.Bind<Level>()
@@ -18,12 +23,13 @@ namespace WordMaster
                 .AsSingle()
                 .NonLazy();
 
+            Container.BindInstance(_playerSerializationState).AsSingle();
+
             Container.Bind(typeof(Player), typeof(IFlowTarget))
                 .FromSubContainerResolve()
                 .ByInstaller<PlayerInstaller>()
                 .AsSingle()
                 .NonLazy();
-            
 
             Container.Bind<Alphabet>().AsSingle()
                 .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");

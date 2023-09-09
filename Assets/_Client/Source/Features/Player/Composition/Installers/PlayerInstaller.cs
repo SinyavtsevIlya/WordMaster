@@ -8,10 +8,12 @@ namespace WordMaster
     public class PlayerInstaller : Installer<PlayerInstaller>
     {
         private readonly EnergySettings _energySettings;
+        private readonly PlayerSerializationState _playerSerializationState;
 
-        public PlayerInstaller(EnergySettings energySettings)
+        public PlayerInstaller(EnergySettings energySettings, PlayerSerializationState playerSerializationState)
         {
             _energySettings = energySettings;
+            _playerSerializationState = playerSerializationState;
         }
 
         public override void InstallBindings()
@@ -25,6 +27,8 @@ namespace WordMaster
                 .WithArguments(
                     new ReactiveProperty<float>(_energySettings.InitialEnergyAmount),
                     new ReactiveProperty<float>(_energySettings.InitialEnergyAmount));
+
+            Container.BindInstance(new FloatReactiveProperty(_playerSerializationState.BestDistancePassed)).AsSingle();
 
             Container.Bind<CoreScreen>()
                 .FromSubContainerResolve()
@@ -48,6 +52,7 @@ namespace WordMaster
             Container.BindRule<AddScoreRule>();
             Container.BindRule<AddEnergyForScoreRule>();
             Container.BindRule<LossEnergyRule>();
+            Container.BindRule<SavePlayerRule>();
 
             Container.BindSubKernel();
         }

@@ -16,11 +16,16 @@ namespace WordMaster
         public CompositeDisposable Disposables { get; }
 
         public float DistancePassed => _camera.transform.position.x;
+        
+        public FloatReactiveProperty BestDistancePassed { get; } 
 
         public Player(Sequence sequence, 
             IReactiveCollection<Word> completedWords, 
             Camera camera, 
-            CompositeDisposable disposables, Score score, Energy energy)
+            CompositeDisposable disposables,
+            Score score, 
+            Energy energy,
+            FloatReactiveProperty bestDistancePassed)
         {
             _camera = camera;
             Sequence = sequence;
@@ -28,6 +33,7 @@ namespace WordMaster
             Disposables = disposables;
             Score = score;
             Energy = energy;
+            BestDistancePassed = bestDistancePassed;
         }
 
         public void Dispose()
