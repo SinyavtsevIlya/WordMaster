@@ -47,7 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _root: {fileID: 5659610166303158122}
   _ease: 18
-  _sprite: {fileID: 3516087056266018817}
+  _sprites:
+  - {fileID: 3516087056266018817}
+  - {fileID: 1514169356957724801}
+  - {fileID: 4140543224093844678}
   _matchedColor: {r: 0.6852218, g: 0.9433962, b: 0.21804914, a: 1}
   _failedColor: {r: 1, g: 0.33184844, b: 0.2688679, a: 1}
   _settings: {fileID: 11400000, guid: d25d36a48595639429f6e45c93c3be5f, type: 2}

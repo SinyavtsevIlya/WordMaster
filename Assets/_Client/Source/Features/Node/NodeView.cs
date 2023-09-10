@@ -9,7 +9,7 @@ namespace WordMaster
     {
         [SerializeField] private Transform _root;
         [SerializeField] private Ease _ease;
-        [SerializeField] private SpriteRenderer _sprite;
+        [SerializeField] private SpriteRenderer[] _sprites;
 
         [SerializeField] private Color _matchedColor;
         [SerializeField] private Color _failedColor;
@@ -29,8 +29,11 @@ namespace WordMaster
 
         public void SetMatchState(bool isMatched)
         {
-            _sprite.color = isMatched ? _settings.MatchedColor : _settings.FailedColor;
-            _sprite.DOColor(Color.clear, _settings.ColorDuration).SetDelay(.1f);
+            foreach (var spriteRenderer in _sprites)
+            {
+                spriteRenderer.color = isMatched ? _settings.MatchedColor : _settings.FailedColor;
+                spriteRenderer.DOFade(0f, _settings.ColorDuration).SetDelay(.1f);
+            }
             _root.DOScale(_settings.ScaleEndValue, _settings.ScaleDuration).SetEase(_settings.ScaleEase).OnComplete(Dispose);
         }
 
