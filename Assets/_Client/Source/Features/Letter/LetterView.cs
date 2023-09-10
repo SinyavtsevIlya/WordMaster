@@ -68,7 +68,6 @@ namespace WordMaster
         
         private void Awake()
         {
-            Colorize(_settings);
         }
 
         private void Colorize(LetterViewSettings settings)
@@ -86,6 +85,12 @@ namespace WordMaster
         public void RandomizeRotation()
         {
             transform.Rotate(Vector3.forward, UnityEngine.Random.Range(-7, 7));
+        }
+
+        public void SetSettings(LetterViewSettings settings)
+        {
+            _settings = settings;
+            Colorize(_settings);
         }
     }
 }

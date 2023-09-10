@@ -1,0 +1,227 @@
+fileFormatVersion: 2
+guid: a1c38e3dbfb53d848a6b3551e24082f6
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bleistift Holz
+    second: {fileID: 2100000, guid: ff16abbcd582f8e49ac0ebeeb2444009, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bleistift Miene
+    second: {fileID: 2100000, guid: 44efa9b5ae3b64d44bf351e09b69caed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Bleistift Wei\xDF"
+    second: {fileID: 2100000, guid: b4288a9aaa9df314087fb0dcfdb9ed57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Buntstift 1 Zufallsfarbe
+    second: {fileID: 2100000, guid: e1739b1f863d6ed48a8408b40c2b63da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Buntstift 2 Zufallsfarbe
+    second: {fileID: 2100000, guid: e3112447e6dd8764cbf58b873f2b1e46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Filzer Schwarz
+    second: {fileID: 2100000, guid: 36a6f5eda067d214a83a21355b5a3be6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Filzstift
+    second: {fileID: 2100000, guid: 23d6b7b517fc0674a8885ca3b27fa619, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fineliner
+    second: {fileID: 2100000, guid: 81552d4a6d963e74f8080c1328682798, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Fineliner Wei\xDF"
+    second: {fileID: 2100000, guid: 8c44f97aa602f9849a62ae06972a9118, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Fineliner Zuf\xE4llige Farbe"
+    second: {fileID: 2100000, guid: 81b965b0cb394804f9e89ce401f68460, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Geodreieck
+    second: {fileID: 2100000, guid: 880fe19f1e9ee684a9efc6f9590c229e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kugelschreiber 1
+    second: {fileID: 2100000, guid: cca4324fe51386443b36ad7440d9dd1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kugelschreiber 2
+    second: {fileID: 2100000, guid: 039831a273d86a549ae006b75036e8ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kugelschreiber 2 Silber
+    second: {fileID: 2100000, guid: e1206fed3633430428c164baeea091bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rot
+    second: {fileID: 2100000, guid: 703e3874c1137c54d8e378feb4722596, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Schere Metall
+    second: {fileID: 2100000, guid: e0e1cab51659631499e2b46be3dc0912, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Schere Schraube
+    second: {fileID: 2100000, guid: 7ce7f0b6e795d7c469d4815f74654311, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Schere rotes Gummi
+    second: {fileID: 2100000, guid: be2d540d3d4d2bb4c8bfb065ca6ab35d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Schere schwarzes Gummi
+    second: {fileID: 2100000, guid: f3f2d92e0e7adb247b494cf69509f64c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Silber
+    second: {fileID: 2100000, guid: 6cfde08b0dee92d40a63c7c531df6570, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Spitzer Metall 1
+    second: {fileID: 2100000, guid: 273b5f6e962e9934dbeaae86de3001a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Spitzer Metall 2
+    second: {fileID: 2100000, guid: e12ba7eb8b603e141a42fca012b57e6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tintenkiller
+    second: {fileID: 2100000, guid: af4d7a89e7ea3e146b720764759558fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tintenkiller 2
+    second: {fileID: 2100000, guid: cb992d13b1fc05b49aa5a2fe4a350dc2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Zuf\xE4llige Farbe"
+    second: {fileID: 2100000, guid: da2fac5192e718d4bb897079a7ea088b, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

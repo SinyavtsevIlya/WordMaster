@@ -11,13 +11,16 @@ namespace WordMaster
         private readonly Vector2 _position;
         private readonly LetterSettings _settings;
         private IFlowTarget _flowTarget;
+        private readonly LevelSettings _levelSettings;
 
-        public LetterInstaller(char character, Vector2 position, LetterSettings settings, IFlowTarget flowTarget)
+        public LetterInstaller(char character, Vector2 position, LetterSettings settings, IFlowTarget flowTarget,
+            LevelSettings levelSettings)
         {
             _character = character;
             _position = position;
             _settings = settings;
             _flowTarget = flowTarget;
+            _levelSettings = levelSettings;
         }
         
         public override void InstallBindings()
@@ -33,7 +36,11 @@ namespace WordMaster
             Container.Bind<LetterView>()
                 .FromComponentInNewPrefab(_settings.ViewPrefab)
                 .AsSingle()
-                .OnInstantiated((InjectContext context, LetterView view) => view.SetFlowTarget(_flowTarget));
+                .OnInstantiated((InjectContext context, LetterView view) =>
+                {
+                    view.SetFlowTarget(_flowTarget);
+                    view.SetSettings(_settings.GetViewSettings( (int)_position.x / _levelSettings.StageWidth));
+                });
             
             Container.BindSubKernel();
         }

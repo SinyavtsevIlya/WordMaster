@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: LetterSettings
   m_EditorClassIdentifier: 
   _viewPrefab: {fileID: 4941663408825362687, guid: 758f6388cc20ca84bbdf882244b41958, type: 3}
+  _lettersByStages:
+  - {fileID: 11400000, guid: a58ab9aeab5dc9341a83cada6b55e748, type: 2}
+  - {fileID: 11400000, guid: 9758839876b5fb04fb9634b84689df13, type: 2}
+  - {fileID: 11400000, guid: 937a7f7ebc65df544b5b4f32851f7bc3, type: 2}
   Size: 0.4

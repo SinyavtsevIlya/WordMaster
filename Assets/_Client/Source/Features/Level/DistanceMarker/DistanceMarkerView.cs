@@ -9,7 +9,7 @@ namespace WordMaster
         
         public void SetDistance(float distance)
         {
-            _label.SetText($"{distance} m");
+            _label.SetText($"{distance} см.");
             var p = transform.position;
             transform.position = new Vector3(distance, p.y, p.z);
         }

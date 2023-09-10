@@ -10,6 +10,7 @@ namespace WordMaster
         [field: SerializeField] public int Height { get; private set; }
         [field: SerializeField] public int GenerationOffset { get; private set; }
         [field: SerializeField] public int GenerationOffsetRandomization { get; private set; }
+        [field: SerializeField] public int StageWidth { get; private set; }
         
         [field: SerializeField] public DistanceMarkerView DistanceMarkerView { get; private set; }
         [field: SerializeField] public BestDistanceMarkerView BestDistanceMarkerView { get; private set; }

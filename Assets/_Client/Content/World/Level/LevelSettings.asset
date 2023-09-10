@@ -17,5 +17,6 @@ MonoBehaviour:
   <Height>k__BackingField: 15
   <GenerationOffset>k__BackingField: 16
   <GenerationOffsetRandomization>k__BackingField: 2
+  <StageWidth>k__BackingField: 100
   <DistanceMarkerView>k__BackingField: {fileID: 7195380218899160625, guid: d775e7c4fd447384785067c7dec45130, type: 3}
   <BestDistanceMarkerView>k__BackingField: {fileID: 1935120165224837551, guid: f7da15e0814960a45a03905435b96e7a, type: 3}
