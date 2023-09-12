@@ -34,7 +34,7 @@ namespace WordMaster
         public void Initialize()
         {
             _player
-                .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + 10)
+                .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + _level.Settings.LevelHalfWidth)
                 .Where(distancePassed => distancePassed % 5 == 0)
                 .Subscribe(GenerateLetters)
                 .AddTo(_level.Disposables);
@@ -61,18 +61,36 @@ namespace WordMaster
                 
                 shuffledVariants.Shuffle();
 
-                var letterPlacements = Enumerable.Range(0, _level.Settings.Height).ToList().Shuffle().Take(shuffledVariants.Count).ToList();
+                var verticalOffset = 2;
+                var levelHeight = _level.Settings.Height;
+                var startPosition = (int)(-levelHeight / 2f) + verticalOffset;
+                var length = levelHeight - verticalOffset * 2;
+                var letterPlacements = Enumerable.Range(startPosition, length).ToList().Shuffle().Take(shuffledVariants.Count).ToList();
 
                 for (var index = 0; index < shuffledVariants.Count; index++)
                 {
                     var variant = shuffledVariants[index];
                     var randomizationRange = _level.Settings.GenerationOffsetRandomization;
                     var randomization = Random.Next(-randomizationRange, randomizationRange);
-                    var position = new Vector2(horizontalPosition + _level.Settings.GenerationOffset + randomization, letterPlacements[index]);
+                    var position = new Vector2(horizontalPosition + randomization, letterPlacements[index]);
                     var letter = _letterFactory.Create(variant, position);
                     
                     _level.Letters.Add(letter);
                     letter.AddTo(_level.Disposables);
+
+                    var culling = Observable.EveryUpdate().Subscribe(_ =>
+                    {
+                        if (_player.DistancePassed - letter.Position.Value.x >
+                            _level.Settings.LevelHalfWidth)
+                        {
+                            _level.Letters.Remove(letter);
+                            letter.Culled.OnNext(Unit.Default);
+                            letter.Dispose();
+                        }
+                    });
+
+                    letter.IsPicked.Where(isTrue => isTrue).Subscribe(_ => culling.Dispose()).AddTo(letter.Disposables);
+                    culling.AddTo(_level.Disposables);
                 }
             }
         }

@@ -14,5 +14,7 @@ namespace WordMaster
         
         [field: SerializeField] public DistanceMarkerView DistanceMarkerView { get; private set; }
         [field: SerializeField] public BestDistanceMarkerView BestDistanceMarkerView { get; private set; }
+
+        public int LevelHalfWidth => (int) ((float) Screen.width / Screen.height * Height / 2f + GenerationOffset);
     }
 }

@@ -15,6 +15,7 @@ namespace WordMaster
         public ReactiveProperty<bool> IsPicked { get; }
         
         public Subject<bool> IsMatched { get; }
+        public Subject<Unit> Culled { get; }
         
         public CompositeDisposable Disposables { get; }
         
@@ -25,6 +26,7 @@ namespace WordMaster
             Position = new ReactiveProperty<Vector2>(position);
             IsPicked = new ReactiveProperty<bool>();
             IsMatched = new Subject<bool>();
+            Culled = new Subject<Unit>();
             Radius = radius;
             Disposables = disposables;
         }
