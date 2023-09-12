@@ -4,7 +4,7 @@ namespace WordMaster
 {
     public interface IFlowTarget
     {
-        public Vector3 GetTargetPosition();
+        public Transform GetTarget();
 
         public void SetFlowCompleted();
     }

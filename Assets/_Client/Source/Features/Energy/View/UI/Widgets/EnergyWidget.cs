@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,28 +8,75 @@ namespace WordMaster
 {
     public class EnergyWidget : MonoBehaviour, IFlowTarget
     {
-        [SerializeField] private Image _energyBar;
-        [SerializeField] private TMP_Text _energyLabel;
-        
-        public void SetEnergy(float current, float max)
+        private const float Duration = .5f;
+
+        [SerializeField] private Image _progressBar;
+        [SerializeField] private Transform _flowTarget;
+
+        private float _maxValue;
+        private float _initialWidth;
+
+        private bool _isInitialized;
+
+        private Tweener _tweener;
+
+        private void Awake()
         {
-            if (max == 0f)
-                throw new ArgumentException("max energy can't be zero", nameof(max));
+            _initialWidth = _progressBar.rectTransform.sizeDelta.x;
+        }
+        
+        public void SetEnergy(float current, float maxValue, float duration)
+        {
+            if (maxValue == 0f)
+                throw new ArgumentException("max energy can't be zero", nameof(maxValue));
             
-            _energyBar.fillAmount = current / max;
-            _energyLabel.SetText($"{(int)current}/{(int)max}");
+            _maxValue = maxValue;
+            
+            if (!_isInitialized)
+            {
+                duration = 0f;
+                _isInitialized = true;
+            }
+
+            SetFillAmount(current, duration);
         }
 
-        public Vector3 GetTargetPosition()
-        {
-            var sizeDeltaX = _energyBar.rectTransform.rect.width;
-            var deltaX = Vector3.right * sizeDeltaX;
-            return _energyBar.transform.position - deltaX + deltaX * _energyBar.fillAmount;
-        }
+        public Transform GetTarget() => _flowTarget;
 
         public void SetFlowCompleted()
         {
+            _tweener.Play();
             
+            var sequence = DOTween.Sequence();
+            sequence
+                .Append(_flowTarget.DOScale(Vector3.one * 1.2f, .1f).SetEase(Ease.OutSine))
+                .Append(_flowTarget.DOScale(Vector3.one, .1f).SetEase(Ease.InSine));
+        }
+
+        private void SetFillAmount(float value, float duration)
+        {
+            var endValue = new Vector2(_initialWidth * (value / _maxValue), _progressBar.rectTransform.sizeDelta.y);
+
+            if (duration == 0f)
+            {
+                if (_tweener != null && _tweener.IsActive())
+                    return;
+                
+                _progressBar.rectTransform.sizeDelta = endValue;
+            }
+            else
+            {
+                DOTween.Kill(_progressBar.rectTransform);
+                _tweener = _progressBar.rectTransform.DOSizeDelta(endValue, duration)
+                    .SetEase(Ease.OutExpo)
+                    .SetUpdate(true)
+                    .Pause();
+            }
+        }
+
+        public void Dispose()
+        {
+            _isInitialized = false;
         }
     }
 }

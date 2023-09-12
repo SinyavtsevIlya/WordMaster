@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnergySettings
   m_EditorClassIdentifier: 
   LossPerSecond: 2
-  RecoveryPerScorePoint: 3
-  InitialEnergyAmount: 70
+  RecoveryPerScorePoint: 3.2
+  InitialEnergyAmount: 80

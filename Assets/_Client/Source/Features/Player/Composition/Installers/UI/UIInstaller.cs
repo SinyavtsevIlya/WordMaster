@@ -5,16 +5,25 @@ namespace WordMaster
 {
     public class UIInstaller : Installer<UIInstaller>
     {
-        private UISettings _uiSettings;
+        private readonly UISettings _uiSettings;
+        private readonly Camera _camera;
 
-        public UIInstaller(UISettings uiSettings)
+        public UIInstaller(UISettings uiSettings, Camera camera)
         {
             _uiSettings = uiSettings;
+            _camera = camera;
         }
 
         public override void InstallBindings()
         {
-            Container.Bind<Canvas>().FromComponentInNewPrefab(_uiSettings.CanvasPrefab).AsSingle();
+            Container.Bind<Canvas>()
+                .FromComponentInNewPrefab(_uiSettings.CanvasPrefab)
+                .AsSingle()
+                .OnInstantiated((InjectContext ctx, Canvas canvas) =>
+                {
+                    canvas.worldCamera = _camera;
+                    canvas.planeDistance = 12f;
+                });
 
             Container.Bind<CoreScreen>()
                 .FromSubContainerResolve()

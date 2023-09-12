@@ -60,7 +60,9 @@ MonoBehaviour:
   _matchedColor: {r: 0.6852218, g: 0.9433962, b: 0.21804914, a: 1}
   _failedColor: {r: 1, g: 0.33184844, b: 0.2688679, a: 1}
   _ease: 19
-  _duration: 0.49
+  _flowEase: 17
+  _flowDuration: 0.5
+  _duration: 0.25
   _endValue: 0
 --- !u!1 &2578016146712482694
 GameObject:

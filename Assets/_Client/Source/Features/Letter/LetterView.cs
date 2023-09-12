@@ -1,5 +1,7 @@
 ﻿using System;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
 namespace WordMaster
@@ -14,6 +16,8 @@ namespace WordMaster
         [SerializeField] private Color _matchedColor;
         [SerializeField] private Color _failedColor;
         [SerializeField] private Ease _ease;
+        [SerializeField] private Ease _flowEase;
+        [SerializeField] private float _flowDuration;
         [SerializeField] private float _duration;
         [SerializeField] private float _endValue;
 
@@ -40,7 +44,7 @@ namespace WordMaster
             if (isMatched)
             {
                 gameObject.transform
-                    .DOMove(_flowTarget.GetTargetPosition(), 1f).SetEase(Ease.InExpo)
+                    .DOMoveInTargetLocalSpace(_flowTarget.GetTarget(), Vector3.zero, _flowDuration).SetEase(_flowEase)
                     .OnComplete(() =>
                     {
                         _flowTarget.SetFlowCompleted();
@@ -91,6 +95,20 @@ namespace WordMaster
         {
             _settings = settings;
             Colorize(_settings);
+        }
+    }
+
+    public static class TweenExtensions
+    {
+        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveInTargetLocalSpace(this Transform transform, Transform target, Vector3 targetLocalEndPosition, float duration)
+        {
+            var t = DOTween.To(
+                () => transform.position - target.transform.position, // Value getter
+                x => transform.position = x + target.transform.position, // Value setter
+                targetLocalEndPosition, 
+                duration);
+            t.SetTarget(transform);
+            return t;
         }
     }
 }

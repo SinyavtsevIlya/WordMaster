@@ -20,7 +20,11 @@ namespace WordMaster
         public void Initialize()
         {
             _energy.Current
-                .Subscribe(energy => _energyWidget.SetEnergy(energy, _energy.Max.Value))
+                .Pairwise()
+                .Subscribe(energy => _energyWidget.SetEnergy(
+                    energy.Current, 
+                    _energy.Max.Value, 
+                    energy.Current - energy.Previous > 0f ? .5f : 0f))
                 .AddTo(_disposables);
         }
     }
