@@ -8,10 +8,7 @@ namespace WordMaster
     {
         public override void InstallBindings()
         {
-            Container.Bind<Trie>()
-                .FromSubContainerResolve()
-                .ByInstaller<TrieInstaller>()
-                .AsSingle();
+     
         }
     }
 }

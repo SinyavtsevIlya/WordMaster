@@ -20,3 +20,18 @@ MonoBehaviour:
   <StageWidth>k__BackingField: 100
   <DistanceMarkerView>k__BackingField: {fileID: 7195380218899160625, guid: d775e7c4fd447384785067c7dec45130, type: 3}
   <BestDistanceMarkerView>k__BackingField: {fileID: 1935120165224837551, guid: f7da15e0814960a45a03905435b96e7a, type: 3}
+  <Props>k__BackingField:
+  - Prefab: {fileID: 4217115415237790341, guid: e7e906aef98695d4bb722733163d55ba, type: 3}
+  - Prefab: {fileID: 1030593371468548388, guid: 0c573406c270e544eb18f3bcca57a7df, type: 3}
+  - Prefab: {fileID: 6953380530406840266, guid: a52fe763fb0755049b8234090d2c9321, type: 3}
+  - Prefab: {fileID: 4713416178722936592, guid: 4b6deb2720a47184a863b309ae0d27db, type: 3}
+  - Prefab: {fileID: 4641529890969378643, guid: 11cbc23a0b2c0de4390e60322507d5dc, type: 3}
+  - Prefab: {fileID: 1146910835449328696, guid: a677ed3a692deb241b9b17facead4773, type: 3}
+  - Prefab: {fileID: 455680039764441564, guid: 8f006cd0aa53fd445860d88dbad99b1a, type: 3}
+  - Prefab: {fileID: 8800903224454423091, guid: 21450038a872a754185933e1fc8a78b2, type: 3}
+  - Prefab: {fileID: 1927331264560275913, guid: c8193f254093b584fa10637ed587eb23, type: 3}
+  - Prefab: {fileID: 4418550942807480575, guid: f59194082a69aa34e830300eb635a0fd, type: 3}
+  - Prefab: {fileID: 3671573514467061004, guid: 2b37ca945cdfb5f4b891c7352b7e516d, type: 3}
+  - Prefab: {fileID: 8456083194986306105, guid: e6e1099697aa83642a97f8e884e5b4c0, type: 3}
+  - Prefab: {fileID: 5491963208588649978, guid: 38c6916130a466a4c8d60a174ce5500f, type: 3}
+  <Background>k__BackingField: {fileID: 5368425765350912761, guid: 8e963ac7778563b4a82601e016cda622, type: 3}

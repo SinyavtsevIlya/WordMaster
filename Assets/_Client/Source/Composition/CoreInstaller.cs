@@ -11,12 +11,18 @@ namespace WordMaster
         [SerializeField] private ScriptableObject[] _settings;
 
         private PlayerSerializationState _playerSerializationState;
+        private Trie _trie;
 
-        public void SetPlayerSerializationState(PlayerSerializationState playerSerializationState) =>
+        public void Construct(Trie trie, PlayerSerializationState playerSerializationState)
+        {
+            _trie = trie;
             _playerSerializationState = playerSerializationState;
+        }
 
         public override void InstallBindings()
         {
+            Container.BindInstance(_trie).AsSingle();
+            
             Container.Bind<Level>()
                 .FromSubContainerResolve()
                 .ByInstaller<LevelInstaller>()

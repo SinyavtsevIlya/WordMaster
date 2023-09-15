@@ -30,6 +30,7 @@ namespace WordMaster
                 .AsSingle();
 
             Container.BindRule<LevelGenerationRule>();
+            Container.BindRule<SidePropsGenerationRule>();
             Container.BindRule<DistanceMarkerGenerationRule>();
             Container.BindRule<RestartLevelOnZeroEnergyRule>();
             Container.BindRule<ScrollCameraRule>();
