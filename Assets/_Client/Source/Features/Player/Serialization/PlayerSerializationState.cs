@@ -6,10 +6,12 @@ namespace WordMaster
     public class PlayerSerializationState
     {
         public float BestDistancePassed;
+        public bool IsTutorialShown;
 
-        public PlayerSerializationState(float bestDistancePassed)
+        public PlayerSerializationState(float bestDistancePassed, bool isTutorialShown)
         {
             BestDistancePassed = bestDistancePassed;
+            IsTutorialShown = isTutorialShown;
         }
     }
 }

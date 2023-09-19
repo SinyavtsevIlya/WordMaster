@@ -30,6 +30,11 @@ namespace WordMaster
                     .Subscribe(isMatched => _player.Score.Value++)
                     .AddTo(addEvent.Value.Disposables);
             }).AddTo(_player.Disposables);
+            
+            _player.Sequence.Completed.Subscribe(word =>
+            {
+                _player.CompletedWords.Add(_player.Sequence.ToString());
+            }).AddTo(_player.Disposables);
         }
     }
 }

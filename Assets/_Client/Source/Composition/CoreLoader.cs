@@ -18,10 +18,12 @@ namespace WordMaster
                 throw loadInfo.Exception;
 
             var state = loadInfo.Status == LoadStatus.FileNotExist ?
-                new PlayerSerializationState(0) :
+                new PlayerSerializationState(0, false) :
                 loadInfo.Result;
+
+            var alphobet = new Alphabet("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы", "арбуз");
             
-            GetComponent<CoreInstaller>().Construct(_trie, state);
+            GetComponent<CoreInstaller>().Construct(_trie, state, alphobet);
             GetComponent<SceneContext>().Run();
         }
     }

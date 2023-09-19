@@ -19,12 +19,14 @@ namespace WordMaster
         
         public void Initialize()
         {
-            Disposable.Create(() => SavePlayer()).AddTo(_disposables);
+            Disposable.Create(SavePlayer).AddTo(_disposables);
+            Observable.OnceApplicationQuit().Subscribe(_ => SavePlayer()).AddTo(_disposables);
         }
 
         private void SavePlayer()
         {
             _playerSerializationState.BestDistancePassed = _player.BestDistancePassed.Value;
+            _playerSerializationState.IsTutorialShown = _player.CompletedWords.Count > 0;
 
             SaveLoadOps.Save("player", _playerSerializationState, saveInfo => { });
         }

@@ -1,6 +1,4 @@
-﻿using Rules;
-using UniRx;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -12,11 +10,13 @@ namespace WordMaster
 
         private PlayerSerializationState _playerSerializationState;
         private Trie _trie;
+        private Alphabet _alphabet;
 
-        public void Construct(Trie trie, PlayerSerializationState playerSerializationState)
+        public void Construct(Trie trie, PlayerSerializationState playerSerializationState, Alphabet alphabet)
         {
             _trie = trie;
             _playerSerializationState = playerSerializationState;
+            _alphabet = alphabet;
         }
 
         public override void InstallBindings()
@@ -37,8 +37,18 @@ namespace WordMaster
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<Alphabet>().AsSingle()
-                .WithArguments("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы");
+            Container.BindInstance(_alphabet).AsSingle();
+
+            if (_playerSerializationState.IsTutorialShown)
+            {
+                Container
+                    .BindInstance(_alphabet.ValidStartValues[Random.Range(0, _alphabet.ValidStartValues.Length)])
+                    .AsSingle();
+            }
+            else
+            {
+                Container.BindInstance(_alphabet.InitialWord[0]).AsSingle();
+            }
             
             Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
             

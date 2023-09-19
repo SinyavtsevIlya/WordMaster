@@ -42,7 +42,7 @@ namespace WordMaster
                 .AsSingle()
                 .NonLazy();
             
-            Container.BindInterfacesTo<ReactiveCollection<Word>>().AsSingle();
+            Container.BindInterfacesTo<ReactiveCollection<string>>().AsSingle();
 
             Container.Bind<Sequence>()
                 .FromSubContainerResolve()

@@ -6,11 +6,11 @@ namespace WordMaster
 {
     public class HeadInstaller : Installer<HeadInstaller>
     {
-        private readonly Alphabet _alphabet;
+        private char _startingLetter;
 
-        public HeadInstaller(Alphabet alphabet)
+        public HeadInstaller(char startingLetter)
         {
-            _alphabet = alphabet;
+            _startingLetter = startingLetter;
         }
 
         public override void InstallBindings()
@@ -27,8 +27,7 @@ namespace WordMaster
                 .ByInstaller<LetterInstaller>()
                 .AsSingle();
             
-            var startLetter = _alphabet.ValidStartValues[Random.Range(0, _alphabet.ValidStartValues.Length)];
-            Container.BindInstance(startLetter);
+            Container.BindInstance(_startingLetter);
             Container.BindInstance(Vector2.zero);
         }
     }

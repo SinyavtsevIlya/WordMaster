@@ -8,7 +8,7 @@ namespace WordMaster
     {
         private readonly Camera _camera;
         public Sequence Sequence { get; }
-        public IReactiveCollection<Word> CompletedWords { get; }
+        public IReactiveCollection<string> CompletedWords { get; }
         public Score Score { get; }
         
         public Energy Energy { get; }
@@ -20,7 +20,7 @@ namespace WordMaster
         public FloatReactiveProperty BestDistancePassed { get; } 
 
         public Player(Sequence sequence, 
-            IReactiveCollection<Word> completedWords, 
+            IReactiveCollection<string> completedWords, 
             Camera camera, 
             CompositeDisposable disposables,
             Score score, 
