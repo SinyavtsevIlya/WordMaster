@@ -20,6 +20,8 @@ MonoBehaviour:
   <StageWidth>k__BackingField: 100
   <DistanceMarkerView>k__BackingField: {fileID: 7195380218899160625, guid: d775e7c4fd447384785067c7dec45130, type: 3}
   <BestDistanceMarkerView>k__BackingField: {fileID: 1935120165224837551, guid: f7da15e0814960a45a03905435b96e7a, type: 3}
+  ConnectionHintLabelPrefab: {fileID: 9077280822991436924, guid: 927ee025963825f42b20f1a352a419b4, type: 3}
+  ConnectionHintArrowPrefab: {fileID: 1008652825107129591, guid: 57ff9185fab162d439dbfb6fcf1617e8, type: 3}
   <Props>k__BackingField:
   - Prefab: {fileID: 4217115415237790341, guid: e7e906aef98695d4bb722733163d55ba, type: 3}
   - Prefab: {fileID: 1030593371468548388, guid: 0c573406c270e544eb18f3bcca57a7df, type: 3}

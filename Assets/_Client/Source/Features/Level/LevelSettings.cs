@@ -14,6 +14,9 @@ namespace WordMaster
         
         [field: SerializeField] public DistanceMarkerView DistanceMarkerView { get; private set; }
         [field: SerializeField] public BestDistanceMarkerView BestDistanceMarkerView { get; private set; }
+
+        [field: SerializeField] public GameObject ConnectionHintLabelPrefab;
+        [field: SerializeField] public GameObject ConnectionHintArrowPrefab;
         [field: SerializeField] public PropSettings[] Props { get; private set; }
         [field: SerializeField] public GameObject Background { get; private set; }
         
