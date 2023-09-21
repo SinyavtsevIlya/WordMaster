@@ -23,7 +23,16 @@ public static class DiExtensions
 {
     public static void BindSubKernel(this DiContainer container)
     {
-        container.Bind<Kernel>().AsCached().OnInstantiated<Kernel>((a, b) => b.Initialize()).NonLazy();
+        container.Bind<Kernel>().AsCached()
+            .OnInstantiated<Kernel>((a, b) =>
+            {
+                b.Initialize();
+                foreach (var parentContainer in container.ParentContainers)
+                {
+                    parentContainer.Resolve<DisposableManager>().Add(b);
+                }
+            })
+            .NonLazy();
     }
 }
 

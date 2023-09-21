@@ -11,7 +11,11 @@ namespace WordMaster
         private const float Duration = .5f;
 
         [SerializeField] private Image _progressBar;
+        [SerializeField] private Image _flashlight;
         [SerializeField] private Transform _flowTarget;
+
+        [SerializeField] private Gradient _colorByFillAmount;
+        [SerializeField] private AnimationCurve _amplitudeByFillAmount;
 
         private float _maxValue;
         private float _initialWidth;
@@ -19,6 +23,7 @@ namespace WordMaster
         private bool _isInitialized;
 
         private Tweener _tweener;
+        private Tweener _flashlightTweener;
 
         private void Awake()
         {
@@ -56,6 +61,17 @@ namespace WordMaster
         private void SetFillAmount(float value, float duration)
         {
             var endValue = new Vector2(_initialWidth * (value / _maxValue), _progressBar.rectTransform.sizeDelta.y);
+            _progressBar.color = _colorByFillAmount.Evaluate(value / _maxValue);
+
+            if (value / _maxValue > .25f)
+            {
+                _flashlightTweener?.Kill();
+                _flashlightTweener = null;
+            }
+            else
+            {
+                _flashlightTweener ??= _flashlight.transform.DOPunchScale(Vector3.one * 0.2f, 1f, vibrato: 0).SetLoops(-1).SetEase(Ease.OutExpo);   
+            }
 
             if (duration == 0f)
             {

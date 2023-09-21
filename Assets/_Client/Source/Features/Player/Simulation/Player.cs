@@ -34,6 +34,8 @@ namespace WordMaster
             Score = score;
             Energy = energy;
             BestDistancePassed = bestDistancePassed;
+
+            sequence.AddTo(Disposables);
         }
 
         public void Dispose()

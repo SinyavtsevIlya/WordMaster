@@ -5,7 +5,7 @@ using Zenject;
 
 namespace WordMaster
 {
-    public class InputToHeadTrackingRule : IRule, IInitializable
+    public class InputToHeadTrackingRule : IRule
     {
         private readonly Sequence _sequence;
         private readonly SequenceSettings _settings;
