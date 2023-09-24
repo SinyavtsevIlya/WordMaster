@@ -53,7 +53,9 @@ namespace WordMaster
 
         private void BindInputRules()
         {
-            var inputRule = Application.isMobilePlatform ? typeof(MobileInputRule) : typeof(MouseInputRule);
+            var inputRule = Application.isMobilePlatform 
+                ? typeof(MobileInputRule) 
+                : typeof(MouseInputRule);
 
             Container.BindInterfacesTo(inputRule).AsCached();
         }

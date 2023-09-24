@@ -8,26 +8,39 @@ namespace WordMaster
     {
         private readonly Sequence _sequence;
         private readonly CompositeDisposable _disposables;
+        private readonly Plane _plane;
 
-        public MobileInputRule(Sequence sequence, CompositeDisposable disposables)
+        public MobileInputRule(Sequence sequence, SequenceSettings settings, CompositeDisposable disposables)
         {
             _sequence = sequence;
             _disposables = disposables;
+
+            _plane = new Plane(Vector3.forward, 0);
         }
         
         public void Initialize()
         {
             Observable.EveryUpdate()
-                .Select(_ => Input.mousePosition)
                 .Where(_ => Input.GetMouseButton(0))
-                .Pairwise().Select(pair => pair.Current - pair.Previous)
-                .Subscribe(TrackPointerPosition)
+                .Select(_ => Input.mousePosition)
+                .Select(GetWorldPosition)
+                .Pairwise()
+                .Where(_ => !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonUp(0))
+                .Subscribe(ApplyTranslation)
                 .AddTo(_disposables);
         }
 
-        private void TrackPointerPosition(Vector3 dragDelta)
+        private Vector3 GetWorldPosition(Vector3 mousePosition)
         {
-            _sequence.Head.Value.Letter.Position.Value += (Vector2)dragDelta;
+            mousePosition.z = 1f;
+            var ray = Camera.main.ScreenPointToRay(mousePosition);
+            return _plane.Raycast(ray, out var distance) ? ray.GetPoint(distance) : default;
+        }
+
+        private void ApplyTranslation(Pair<Vector3> worldPositions)
+        {
+            var delta = worldPositions.Current - worldPositions.Previous;
+            _sequence.Head.Value.Letter.Position.Value += (Vector2)delta;
         }
     }
 }
