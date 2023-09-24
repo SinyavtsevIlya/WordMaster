@@ -30,7 +30,7 @@ namespace WordMaster
 
             Container.BindInstance(new FloatReactiveProperty(_playerSerializationState.BestDistancePassed)).AsSingle();
 
-            Container.Bind<CoreScreen>()
+            Container.Bind(typeof(CoreScreen), typeof(GameFinishedPopup))
                 .FromSubContainerResolve()
                 .ByInstaller<UIInstaller>()
                 .AsSingle()
@@ -39,6 +39,12 @@ namespace WordMaster
             Container.Bind(typeof(CoreScreenPresenter), typeof(IFlowTarget))
                 .FromSubContainerResolve()
                 .ByInstaller<CoreScreenInstaller>()
+                .AsSingle()
+                .NonLazy();
+
+            Container.Bind<GameFinishedPopupPresenter>()
+                .FromSubContainerResolve()
+                .ByInstaller<GameFinishedPopupInstaller>()
                 .AsSingle()
                 .NonLazy();
             

@@ -21,13 +21,12 @@ namespace WordMaster
         public void Initialize()
         {
             _sequence.Value.ObserveAdd()
-                .Where(addEvent => addEvent.Index > 1)
                 .Throttle(TimeSpan.FromSeconds(.35f))
                 .Subscribe(_ =>
                 {
                     if (_trie.Search(_sequence.ToString(), out var _, out var isEndOfTheWord))
                     {
-                        if (isEndOfTheWord)
+                        if (isEndOfTheWord && _sequence.Value.Count > 2)
                             _sequence.Complete();
                     }
                     else

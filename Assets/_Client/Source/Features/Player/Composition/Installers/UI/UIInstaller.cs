@@ -25,7 +25,7 @@ namespace WordMaster
                     canvas.planeDistance = 12f;
                 });
 
-            Container.Bind<CoreScreen>()
+            Container.Bind(typeof(CoreScreen), typeof(GameFinishedPopup))
                 .FromSubContainerResolve()
                 .ByInstaller<ScreensInstaller>()
                 .AsSingle()

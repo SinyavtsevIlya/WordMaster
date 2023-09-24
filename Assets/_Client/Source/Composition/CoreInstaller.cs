@@ -30,6 +30,10 @@ namespace WordMaster
                 .ByInstaller<LevelInstaller>()
                 .AsSingle()
                 .NonLazy();
+            
+            Container.Bind<RanOutOfEnergyEvent>().AsSingle();
+            Container.Bind<ResumeEvent>().AsSingle();
+            Container.Bind<LoseEvent>().AsSingle();
 
             Container.BindInstance(_playerSerializationState).AsSingle();
 

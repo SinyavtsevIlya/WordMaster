@@ -156,6 +156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoreWidget
       objectReference: {fileID: 0}
+    - target: {fileID: 2157931990365957281, guid: e42cad561ddc39444800805d7c5634a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e42cad561ddc39444800805d7c5634a0, type: 3}
 --- !u!224 &5003468672197524442 stripped

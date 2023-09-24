@@ -29,7 +29,7 @@ namespace WordMaster
                 .AddTo(_disposables);
             
             Disposable.Create(SavePlayer).AddTo(_disposables);
-            //Observable.OnceApplicationQuit().Subscribe(_ => SavePlayer()).AddTo(_disposables);
+            Observable.OnceApplicationQuit().Subscribe(_ => SavePlayer()).AddTo(_disposables);
         }
 
         private void SavePlayer()

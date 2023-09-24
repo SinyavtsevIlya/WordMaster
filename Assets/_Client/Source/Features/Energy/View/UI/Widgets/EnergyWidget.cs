@@ -34,6 +34,8 @@ namespace WordMaster
         {
             if (maxValue == 0f)
                 throw new ArgumentException("max energy can't be zero", nameof(maxValue));
+
+            current = Mathf.Clamp(current, 0f, maxValue);
             
             _maxValue = maxValue;
             
@@ -42,8 +44,9 @@ namespace WordMaster
                 duration = 0f;
                 _isInitialized = true;
             }
-
+            
             SetFillAmount(current, duration);
+            AnimateFlashlight(current);
         }
 
         public Transform GetTarget() => _flowTarget;
@@ -62,20 +65,10 @@ namespace WordMaster
         {
             var endValue = new Vector2(_initialWidth * (value / _maxValue), _progressBar.rectTransform.sizeDelta.y);
             _progressBar.color = _colorByFillAmount.Evaluate(value / _maxValue);
-
-            if (value / _maxValue > .25f)
-            {
-                _flashlightTweener?.Kill();
-                _flashlightTweener = null;
-            }
-            else
-            {
-                _flashlightTweener ??= _flashlight.transform.DOPunchScale(Vector3.one * 0.2f, 1f, vibrato: 0).SetLoops(-1).SetEase(Ease.OutExpo);   
-            }
-
+            
             if (duration == 0f)
             {
-                if (_tweener != null && _tweener.IsActive())
+                if (_tweener != null && _tweener.IsPlaying())
                     return;
                 
                 _progressBar.rectTransform.sizeDelta = endValue;
@@ -87,6 +80,20 @@ namespace WordMaster
                     .SetEase(Ease.OutExpo)
                     .SetUpdate(true)
                     .Pause();
+            }
+        }
+
+        private void AnimateFlashlight(float value)
+        {
+            if (value / _maxValue > .25f)
+            {
+                _flashlightTweener?.Kill();
+                _flashlightTweener = null;
+            }
+            else
+            {
+                _flashlightTweener ??= _flashlight.transform.DOPunchScale(Vector3.one * 0.2f, 1f, vibrato: 0).SetLoops(-1)
+                    .SetEase(Ease.OutExpo);
             }
         }
 

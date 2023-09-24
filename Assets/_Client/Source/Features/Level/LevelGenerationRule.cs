@@ -74,9 +74,9 @@ namespace WordMaster
 
             _TokenlettersAmount += takeRange;
 
-            var wrongCharacters = range.y - takeRange;
+            var wrongCharactersCount = _player.DistancePassed < 50 ? 0 : range.y - takeRange;
 
-            shuffledVariants.AddRange(_alphabet.Values.Shuffle().Take(wrongCharacters));
+            shuffledVariants.AddRange(_alphabet.Values.Shuffle().Take(wrongCharactersCount));
 
             shuffledVariants.Shuffle();
             return shuffledVariants;

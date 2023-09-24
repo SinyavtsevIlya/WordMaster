@@ -15,4 +15,4 @@ MonoBehaviour:
   CanvasPrefab: {fileID: 6635559879734868024, guid: 921bfcea0a3148649abf2ba76e02910e, type: 3}
   Screens:
   - {fileID: 7633732641962240988, guid: d407b287038e40a4994d38871ebf479a, type: 3}
-  CoreScreen: {fileID: 7633732641962240988, guid: d407b287038e40a4994d38871ebf479a, type: 3}
+  - {fileID: 3340773602084046438, guid: 18a8e659b8158e341b16045e553ed9d1, type: 3}

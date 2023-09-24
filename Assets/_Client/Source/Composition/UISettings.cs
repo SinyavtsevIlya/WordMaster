@@ -7,6 +7,5 @@ namespace WordMaster
     {
         public Canvas CanvasPrefab;
         public MonoBehaviour[] Screens;
-        public CoreScreen CoreScreen;
     }
 }

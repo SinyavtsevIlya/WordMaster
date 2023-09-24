@@ -1,18 +1,17 @@
 ﻿using Rules;
 using UniRx;
 using UnityEngine;
-using Zenject;
 
 namespace WordMaster
 {
-    public class InputToHeadTrackingRule : IRule
+    public class MouseInputRule : IRule
     {
         private readonly Sequence _sequence;
         private readonly SequenceSettings _settings;
         private readonly CompositeDisposable _disposables;
         private readonly Plane _plane;
 
-        public InputToHeadTrackingRule(Sequence sequence, SequenceSettings settings, CompositeDisposable disposables)
+        public MouseInputRule(Sequence sequence, SequenceSettings settings, CompositeDisposable disposables)
         {
             _sequence = sequence;
             _settings = settings;
