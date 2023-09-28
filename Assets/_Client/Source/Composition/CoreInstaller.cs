@@ -1,4 +1,5 @@
 ﻿using System;
+using Plugins.Nanory.SaveLoad;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -11,11 +12,13 @@ namespace WordMaster
         [SerializeField] private ScriptableObject[] _settings;
 
         private PlayerSerializationState _playerSerializationState;
+        private ISaveLoad _saveLoad;
         private Trie _trie;
         private Alphabet _alphabet;
 
-        public void Construct(Trie trie, PlayerSerializationState playerSerializationState, Alphabet alphabet)
+        public void Construct(ISaveLoad saveLoad, Trie trie, PlayerSerializationState playerSerializationState, Alphabet alphabet)
         {
+            _saveLoad = saveLoad;
             _trie = trie;
             _playerSerializationState = playerSerializationState;
             _alphabet = alphabet;
@@ -55,6 +58,8 @@ namespace WordMaster
             {
                 Container.BindInstance(_alphabet.InitialWord[0]).AsSingle();
             }
+
+            Container.Bind<ISaveLoad>().FromInstance(_saveLoad).AsSingle();
             
             Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
             

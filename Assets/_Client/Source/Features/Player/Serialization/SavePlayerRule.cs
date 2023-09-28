@@ -9,23 +9,33 @@ namespace WordMaster
         private readonly Player _player;
         private readonly PlayerSerializationState _playerSerializationState;
         private readonly CompositeDisposable _disposables;
+        private readonly ISaveLoad _saveLoad;
 
-        public SavePlayerRule(Player player, PlayerSerializationState playerSerializationState, CompositeDisposable disposables)
+        public SavePlayerRule(Player player, PlayerSerializationState playerSerializationState, CompositeDisposable disposables, ISaveLoad saveLoad)
         {
             _player = player;
             _playerSerializationState = playerSerializationState;
             _disposables = disposables;
+            _saveLoad = saveLoad;
         }
         
         public void Initialize()
         {
             _player.BestDistancePassed
                 .Where(bestDistancePassed => bestDistancePassed > _playerSerializationState.BestDistancePassed)
-                .Subscribe(bestDistancePassed => _playerSerializationState.BestDistancePassed = bestDistancePassed)
+                .Subscribe(bestDistancePassed =>
+                {
+                    _playerSerializationState.BestDistancePassed = bestDistancePassed;
+                    SavePlayer();
+                })
                 .AddTo(_disposables);
 
             _player.CompletedWords.ObserveAdd().Where(_ => !_playerSerializationState.IsTutorialShown)
-                .Subscribe(_ => _playerSerializationState.IsTutorialShown = true)
+                .Subscribe(_ =>
+                {
+                    _playerSerializationState.IsTutorialShown = true;
+                    SavePlayer();
+                })
                 .AddTo(_disposables);
             
             Disposable.Create(SavePlayer).AddTo(_disposables);
@@ -34,7 +44,7 @@ namespace WordMaster
 
         private void SavePlayer()
         {
-            SaveLoadOps.Save("player", _playerSerializationState, saveInfo => { });
+            _saveLoad.Save("player", _playerSerializationState);
         }
     }
 }

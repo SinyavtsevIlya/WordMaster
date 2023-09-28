@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Plugins.Nanory.SaveLoad
 {
-    public static class SaveLoadOps
+    public class SaveLoadOps : ISaveLoad
     {
         public const string Extension = ".json";
         
-        public static LoadInfo<TObject> Load<TObject>(string fileName)
+        public LoadInfo<TObject> Load<TObject>(string fileName)
         {
             var loadInfo = new LoadInfo<TObject>();
             try
@@ -33,7 +33,7 @@ namespace Plugins.Nanory.SaveLoad
             return loadInfo;
         }
 
-        public static void Save<TObject>(string fileName, TObject savable, Action<SaveInfo<TObject>> onCompleted)
+        public void Save<TObject>(string fileName, TObject savable)
         {
             var saveInfo = new SaveInfo<TObject>();
             
@@ -48,8 +48,6 @@ namespace Plugins.Nanory.SaveLoad
                 saveInfo.Status = SaveStatus.Failed;
                 saveInfo.Exception = e;
             }
-            
-            onCompleted.Invoke(saveInfo);
         }
         
         private static string GetFullPath(string fileName)
@@ -63,6 +61,40 @@ namespace Plugins.Nanory.SaveLoad
         }
     }
     
+    public class PlayerPrefsSaveLoad : ISaveLoad 
+    {
+        public LoadInfo<TObject> Load<TObject>(string fileName)
+        {
+            var loadInfo = new LoadInfo<TObject>();
+            
+            if (PlayerPrefs.HasKey(fileName))
+            {
+                var loadResult = PlayerPrefs.GetString(fileName);
+                loadInfo.Result = JsonUtility.FromJson<TObject>(loadResult);
+                loadInfo.Status = LoadStatus.Success;
+            }
+            else
+            {
+                loadInfo.Status = LoadStatus.FileNotExist;
+            }
+
+            return loadInfo;
+        }
+
+        public void Save<TObject>(string fileName, TObject savable)
+        {
+            var json = JsonUtility.ToJson(savable);
+            PlayerPrefs.SetString(fileName, json);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public interface ISaveLoad
+    {
+        LoadInfo<TObject> Load<TObject>(string fileName);
+        void Save<TObject>(string fileName, TObject savable);
+    }
+
     public struct LoadInfo<TObject>
     {
         public LoadInfo(LoadStatus status, TObject result, Exception exception = null)
