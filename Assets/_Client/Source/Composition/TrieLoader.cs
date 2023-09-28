@@ -8,12 +8,19 @@ namespace WordMaster
 {
     public class TrieLoader
     {
+        private readonly SystemLanguage _language;
+
+        public TrieLoader(SystemLanguage language)
+        {
+            _language = language;
+        }
+
         public async Task<Trie> Load()
         {
-            var filename = "russian_nouns.txt";
+            var filename = "nouns.txt";
             
             var filePath = Path.Combine(Application.dataPath, 
-                "_Client", "Content", "Common" , "Vocabulary", "Russian", filename);
+                "_Client", "Content", "Common" , "Vocabulary", _language.ToString(), filename);
             
             var trie = new Trie();
             

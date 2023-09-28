@@ -11,10 +11,8 @@ namespace WordMaster
         
         private async void Start()
         {
-            _trie ??= await new TrieLoader().Load();
-
             var saveLoad = new PlayerPrefsSaveLoad();
-            
+
             var loadInfo = saveLoad.Load<PlayerSerializationState>("player");
 
             if (loadInfo.Status == LoadStatus.Failed)
@@ -24,10 +22,21 @@ namespace WordMaster
                 new PlayerSerializationState(0, false) :
                 loadInfo.Result;
 
-            var alphobet = new Alphabet("абвгдеёжзиклмнопрстуфхцчшщыэюя", "ы", "арбуз");
+            var language = SystemLanguage.English;
+
+            var alphabet = GetAlphabet(language);
             
-            GetComponent<CoreInstaller>().Construct(saveLoad, _trie, state, alphobet);
+            _trie ??= await new TrieLoader(language).Load();
+            
+            GetComponent<CoreInstaller>().Construct(saveLoad, _trie, state, alphabet);
             GetComponent<SceneContext>().Run();
+        }
+
+        private Alphabet GetAlphabet(SystemLanguage language)
+        {
+            return language == SystemLanguage.Russian ?
+                new Alphabet("абвгдеёжзиклмнопрстуфхцчшщыэюя", "арбуз", "ы") 
+                : new Alphabet("abcdefghigklmnopqrstuvwxyz", "apple", string.Empty);
         }
     }
 }
