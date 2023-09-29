@@ -19,14 +19,12 @@ namespace WordMaster
                 throw loadInfo.Exception;
 
             var state = loadInfo.Status == LoadStatus.FileNotExist ?
-                new PlayerSerializationState(0, false) :
+                new PlayerSerializationState(0, false, Application.systemLanguage) :
                 loadInfo.Result;
 
-            var language = SystemLanguage.English;
-
-            var alphabet = GetAlphabet(language);
+            var alphabet = GetAlphabet(state.Language);
             
-            _trie ??= await new TrieLoader(language).Load();
+            _trie ??= await new TrieLoader(state.Language).Load();
             
             GetComponent<CoreInstaller>().Construct(saveLoad, _trie, state, alphabet);
             GetComponent<SceneContext>().Run();

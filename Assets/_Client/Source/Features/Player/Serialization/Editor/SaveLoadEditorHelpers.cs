@@ -12,9 +12,11 @@ namespace Client.SaveLoad
         [MenuItem(MenuItemRoot + "Clear Saves")]
         public static void ClearSaves()
         {
-            var saveDirectory = new DirectoryInfo(Application.persistentDataPath);
-            foreach (var file in saveDirectory.GetFiles())
-                file.Delete();
+            // var saveDirectory = new DirectoryInfo(Application.persistentDataPath);
+            // foreach (var file in saveDirectory.GetFiles())
+            //     file.Delete();
+            
+            PlayerPrefs.DeleteKey("player");
         }
 
         [MenuItem(MenuItemRoot + "Open Saves Folder")]
