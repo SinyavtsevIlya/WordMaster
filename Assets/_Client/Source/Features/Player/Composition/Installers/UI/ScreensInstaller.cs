@@ -18,9 +18,13 @@ namespace WordMaster
         {
             foreach (var screen in _settings.Screens)
             {
+                var spawnRoot = _canvas.transform.childCount > 0 
+                    ? _canvas.transform.GetChild(0) 
+                    : _canvas.transform;
+                
                 Container.Bind(screen.GetType())
                     .FromComponentInNewPrefab(screen)
-                    .UnderTransform(_canvas.transform)
+                    .UnderTransform(spawnRoot)
                     .AsSingle();
             }
         }
