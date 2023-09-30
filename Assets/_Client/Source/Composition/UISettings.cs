@@ -6,6 +6,7 @@ namespace WordMaster
     public class UISettings : ScriptableObject
     {
         public Canvas CanvasPrefab;
+        public Canvas DesktopCanvasPrefab;
         public MonoBehaviour[] Screens;
     }
 }

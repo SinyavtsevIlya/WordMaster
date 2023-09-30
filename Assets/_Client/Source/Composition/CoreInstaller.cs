@@ -35,8 +35,8 @@ namespace WordMaster
                 .NonLazy();
             
             Container.Bind<RanOutOfEnergyEvent>().AsSingle();
-            Container.Bind<ResumeEvent>().AsSingle();
-            Container.Bind<LoseEvent>().AsSingle();
+            Container.Bind<ResumeRequest>().AsSingle();
+            Container.Bind<RestartRequest>().AsSingle();
 
             Container.BindInstance(_playerSerializationState).AsSingle();
 
@@ -65,6 +65,17 @@ namespace WordMaster
             
             foreach (var s in _settings) 
                 Container.Bind(s.GetType()).FromInstance(s).AsSingle();
+            
+            InstallScreenOrientation();
+        }
+
+        private void InstallScreenOrientation()
+        {
+            Screen.orientation = ScreenOrientation.LandscapeRight;
+            Screen.autorotateToPortrait = false;
+            Screen.autorotateToPortraitUpsideDown = false;
+            Screen.autorotateToLandscapeLeft = true;
+            Screen.autorotateToLandscapeRight = true;
         }
     }
 }

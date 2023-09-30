@@ -1,6 +1,9 @@
 ﻿using Plugins.Nanory.SaveLoad;
 using Rules;
 using UniRx;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace WordMaster
 {
@@ -37,6 +40,22 @@ namespace WordMaster
                     SavePlayer();
                 })
                 .AddTo(_disposables);
+
+            var localization = LocalizationSettings.Instance;
+            
+            Observable.FromEvent<Locale>(
+                    h => localization.OnSelectedLocaleChanged += h,
+                    h => localization.OnSelectedLocaleChanged -= h)
+                .Subscribe(_ =>
+                {
+                    var locale = localization.GetSelectedLocale();
+                    var language = locale.LocaleName == "Russian (ru)"
+                        ? SystemLanguage.Russian
+                        : SystemLanguage.English;
+
+                    _playerSerializationState.Language = language;
+                    SavePlayer();
+                }).AddTo(_disposables);
             
             Disposable.Create(SavePlayer).AddTo(_disposables);
             Observable.OnceApplicationQuit().Subscribe(_ => SavePlayer()).AddTo(_disposables);

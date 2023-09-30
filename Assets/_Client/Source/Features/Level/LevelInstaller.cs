@@ -1,4 +1,5 @@
-﻿using Rules;
+﻿using System.Collections.Generic;
+using Rules;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -17,6 +18,7 @@ namespace WordMaster
         public override void InstallBindings()
         {
             Container.Bind<Level>().AsSingle();
+            Container.Bind<HashSet<Vector2Int>>().AsSingle();
             Container.Bind<CompositeDisposable>().AsSingle();
             Container.BindInterfacesTo<ReactiveCollection<Letter>>().AsSingle();
 

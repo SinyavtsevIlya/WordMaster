@@ -1,6 +1,5 @@
 ﻿using Rules;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -31,7 +30,7 @@ namespace WordMaster
             Container.BindInterfacesTo<EnergyWidgetPresenter>()
                 .AsCached()
                 .WithArguments(_energy, _coreScreen.EnergyWidget);
-            
+
             Container.BindRule<CoreScreenPresenter>();
             
             Container.Bind<IFlowTarget>().FromInstance(_coreScreen.EnergyWidget).AsSingle();

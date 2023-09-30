@@ -1,10 +1,18 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace WordMaster
 {
     public class Trie
     {
+        public SystemLanguage Language { get; }
+        
         private readonly TrieNode _root = new TrieNode();
+
+        public Trie(SystemLanguage language)
+        {
+            Language = language;
+        }
 
         public void Insert(string word)
         {

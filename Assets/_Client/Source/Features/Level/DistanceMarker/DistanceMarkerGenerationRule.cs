@@ -23,9 +23,11 @@ namespace WordMaster
         
         public void Initialize()
         {
+            var offset = 55;
+            
             _player
-                .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + 50)
-                .Where(distancePassed => distancePassed % 50 == 0)
+                .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + offset)
+                .Where(distancePassed => distancePassed % offset == 0)
                 .Subscribe(GenerateDistanceMarkers)
                 .AddTo(_level.Disposables);
 
@@ -37,7 +39,10 @@ namespace WordMaster
             if (_player.BestDistancePassed.Value > 0)
             {
                 var bestDistanceMarker = _bestDistanceMarkerFactory.Create();
-                bestDistanceMarker.SetDistance(_player.BestDistancePassed.Value);   
+                bestDistanceMarker.SetDistance(_player.BestDistancePassed.Value);
+                
+                var position = Vector2Int.RoundToInt(bestDistanceMarker.transform.position);
+                _level.UsedPositions.Add(position);
             }
         }
 
@@ -45,6 +50,26 @@ namespace WordMaster
         {
             var distanceMarker = _distanceMarkerFactory.Create();
             distanceMarker.SetDistance(horizontalPosition);
+            
+            var position = Vector2Int.RoundToInt(distanceMarker.transform.position);
+            _level.UsedPositions.Add(position);
+            
+            IDisposable cullingDisposable = null;
+            cullingDisposable = Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    if (_player.DistancePassed - distanceMarker.transform.position.x > _level.Settings.LevelHalfWidth)
+                    {
+                        cullingDisposable?.Dispose();
+                        distanceMarker.Dispose();
+                    }
+                })
+                .AddTo(_level.Disposables)
+                .AddTo(distanceMarker);
+            
+            Disposable
+                .Create(() => _level.UsedPositions.Remove(position))
+                .AddTo(distanceMarker);
         }
     }
 }

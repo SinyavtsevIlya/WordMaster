@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Rules;
 using UniRx;
@@ -40,6 +41,7 @@ namespace WordMaster
 
         private void GenerateLetters(int horizontalPosition)
         {
+            Debug.Log("Generate");
             if (_trie.Search(_player.Sequence.ToString(), out var variants, out var _))
             {
                 var shuffledVariants = GetShuffledVariants(variants);
@@ -49,8 +51,17 @@ namespace WordMaster
                 {
                     var character = shuffledVariants[index];
                     var position = GetPosition(horizontalPosition, letterPlacements, index);
+                    position = _level.EnsurePosition(Vector2Int.RoundToInt(position));
                     var letter = _letterFactory.Create(character, position);
                     _level.Letters.Add(letter);
+                    var usedPosition = Vector2Int.RoundToInt(letter.Position.Value);
+                    _level.UsedPositions.Add(usedPosition);
+                    
+                    Disposable.Create(() =>
+                    {
+                        _level.Letters.Remove(letter);
+                        _level.UsedPositions.Remove(usedPosition);
+                    }).AddTo(letter.Disposables);
                 }
             }
         }
@@ -59,7 +70,9 @@ namespace WordMaster
         {
             var randomizationRange = _level.Settings.GenerationOffsetRandomization;
             var randomization = Random.Next(-randomizationRange, randomizationRange);
-            var position = new Vector2(horizontalPosition + randomization, letterPlacements[index]);
+            horizontalPosition += randomization;
+            
+            var position = new Vector2(horizontalPosition, letterPlacements[index]);
             return position;
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UniRx;
+using UnityEngine;
 
 namespace WordMaster
 {
@@ -7,16 +9,17 @@ namespace WordMaster
     {
         public LevelSettings Settings { get; }
         public IReactiveCollection<Letter> Letters { get; }
-        
+        public HashSet<Vector2Int> UsedPositions { get; }
         public CompositeDisposable Disposables { get; }
-        
+
 
         public Level(LevelSettings settings, IReactiveCollection<Letter> letters,
-            CompositeDisposable disposables)
+            CompositeDisposable disposables, HashSet<Vector2Int> usedPositions)
         {
             Settings = settings;
             Letters = letters;
             Disposables = disposables;
+            UsedPositions = usedPositions;
         }
 
         public void Dispose()

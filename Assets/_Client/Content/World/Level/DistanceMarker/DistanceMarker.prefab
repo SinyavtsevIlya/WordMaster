@@ -46,6 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _label: {fileID: 6692131670705156174}
+  _unitsString:
+    m_TableReference:
+      m_TableCollectionName: GUID:76977147d9aed204786e9c329fc609c2
+    m_TableEntryReference:
+      m_KeyId: 1468991954944
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 1
 --- !u!1 &6692131669628699776
 GameObject:
   m_ObjectHideFlags: 0

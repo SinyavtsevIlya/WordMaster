@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Rules;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace WordMaster
@@ -36,6 +37,7 @@ namespace WordMaster
 
                     _sequence.Value.Add(newHead);
                     _level.Letters.Remove(collisionLetter);
+                    _level.UsedPositions.Remove(Vector2Int.RoundToInt(collisionLetter.Position.Value));
                 }
             }).AddTo(_sequence.Disposables);
         }

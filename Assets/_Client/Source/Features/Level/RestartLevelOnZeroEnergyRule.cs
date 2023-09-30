@@ -9,17 +9,17 @@ namespace WordMaster
     {
         private readonly Player _player;
         private readonly Level _level;
-        private readonly LoseEvent _loseEvent;
-        private readonly ResumeEvent _resumeEvent;
+        private readonly RestartRequest _restartRequest;
+        private readonly ResumeRequest _resumeRequest;
         private readonly RanOutOfEnergyEvent _outOfEnergyEvent;
 
-        public RestartLevelOnZeroEnergyRule(Player player, Level level, LoseEvent loseEvent, ResumeEvent resumeEvent, 
+        public RestartLevelOnZeroEnergyRule(Player player, Level level, RestartRequest restartRequest, ResumeRequest resumeRequest, 
             RanOutOfEnergyEvent outOfEnergyEvent)
         {
             _player = player;
             _level = level;
-            _loseEvent = loseEvent;
-            _resumeEvent = resumeEvent;
+            _restartRequest = restartRequest;
+            _resumeRequest = resumeRequest;
             _outOfEnergyEvent = outOfEnergyEvent;
         }
         
@@ -33,7 +33,7 @@ namespace WordMaster
                 })
                 .AddTo(_player.Disposables);
 
-            _loseEvent.Value.Subscribe(_ =>
+            _restartRequest.Value.Subscribe(_ =>
             {
                 Time.timeScale = 1f;
                 _player.Dispose();
@@ -41,7 +41,7 @@ namespace WordMaster
                 SceneManager.LoadScene("Core");
             }).AddTo(_player.Disposables);
 
-            _resumeEvent.Value.Subscribe(_ =>
+            _resumeRequest.Value.Subscribe(_ =>
             {
                 Time.timeScale = 1f;
                 _player.Energy.Current.Value += _player.Energy.Max.Value;

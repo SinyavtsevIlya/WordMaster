@@ -16,8 +16,12 @@ namespace WordMaster
 
         public override void InstallBindings()
         {
+            var canvas = Application.isMobilePlatform 
+                ? _uiSettings.CanvasPrefab 
+                : _uiSettings.DesktopCanvasPrefab;
+            
             Container.Bind<Canvas>()
-                .FromComponentInNewPrefab(_uiSettings.CanvasPrefab)
+                .FromComponentInNewPrefab(canvas)
                 .AsSingle()
                 .OnInstantiated((InjectContext ctx, Canvas canvas) =>
                 {

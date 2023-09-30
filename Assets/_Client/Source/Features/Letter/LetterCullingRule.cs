@@ -27,7 +27,6 @@ namespace WordMaster
                     if (_player.DistancePassed - letter.Position.Value.x >
                         _level.Settings.LevelHalfWidth)
                     {
-                        _level.Letters.Remove(letter);
                         letter.Culled.OnNext(Unit.Default);
                         letter.Dispose();
                     }

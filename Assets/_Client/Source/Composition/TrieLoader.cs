@@ -22,7 +22,7 @@ namespace WordMaster
             var filePath = Path.Combine(Application.dataPath, 
                 "_Client", "Content", "Common" , "Vocabulary", _language.ToString(), filename);
             
-            var trie = new Trie();
+            var trie = new Trie(_language);
             
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
