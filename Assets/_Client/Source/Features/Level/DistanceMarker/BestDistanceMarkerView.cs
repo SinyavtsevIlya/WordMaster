@@ -11,7 +11,7 @@ namespace WordMaster
         
         public void SetDistance(float distance)
         {
-            _label.SetText($"{(int)distance} {_unitsString.GetLocalizedString()}");
+            _label.SetText($"{(int)distance} {_unitsString.GetLocalizedStringAsync().Result}");
             var p = transform.position;
             transform.position = new Vector3(distance, p.y, p.z);
         }

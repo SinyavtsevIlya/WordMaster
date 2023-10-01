@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Plugins.Nanory.SaveLoad;
 using UnityEngine;
+using UnityEngine.Localization;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -15,18 +17,22 @@ namespace WordMaster
         private ISaveLoad _saveLoad;
         private Trie _trie;
         private Alphabet _alphabet;
+        private Locale _locale;
 
-        public void Construct(ISaveLoad saveLoad, Trie trie, PlayerSerializationState playerSerializationState, Alphabet alphabet)
+        public void Construct(ISaveLoad saveLoad, Trie trie, PlayerSerializationState playerSerializationState,
+            Alphabet alphabet, Locale locale)
         {
             _saveLoad = saveLoad;
             _trie = trie;
             _playerSerializationState = playerSerializationState;
             _alphabet = alphabet;
+            _locale = locale;
         }
 
         public override void InstallBindings()
         {
             Container.BindInstance(_trie).AsSingle();
+            Container.BindInstance(_locale).AsSingle();
             
             Container.Bind<Level>()
                 .FromSubContainerResolve()

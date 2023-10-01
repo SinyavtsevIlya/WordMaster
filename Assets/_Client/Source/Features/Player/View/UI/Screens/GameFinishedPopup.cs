@@ -21,12 +21,12 @@ namespace WordMaster
 
         public void DisplayCurrentDistance(float currentDistance)
         {
-            _currentDistanceLabel.SetText($"{(int)currentDistance} {_unitsSufix.GetLocalizedString()}");
+            _currentDistanceLabel.SetText($"{(int)currentDistance} {_unitsSufix.GetLocalizedStringAsync().Result}");
         }
 
         public void DisplayBestDistance(float bestDistance)
         {
-            _bestDistanceLabel.SetText($"{(int)bestDistance} {_unitsSufix.GetLocalizedString()}");
+            _bestDistanceLabel.SetText($"{(int)bestDistance} {_unitsSufix.GetLocalizedStringAsync().Result}");
         }
 
         public void Show()

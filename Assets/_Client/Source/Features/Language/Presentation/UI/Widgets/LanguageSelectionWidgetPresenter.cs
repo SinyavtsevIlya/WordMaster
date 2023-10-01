@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Rules;
 using UniRx;
+using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 namespace WordMaster
@@ -9,21 +11,21 @@ namespace WordMaster
     {
         private readonly LanguageSelectionWidget _languageSelectionWidget;
         private readonly RestartRequest _restartRequest;
+        private readonly Locale _selectedLocale;
 
-        public LanguageSelectionWidgetPresenter(LanguageSelectionWidget languageSelectionWidget, RestartRequest restartRequest)
+        public LanguageSelectionWidgetPresenter(LanguageSelectionWidget languageSelectionWidget, RestartRequest restartRequest, Locale selectedLocale)
         {
             _languageSelectionWidget = languageSelectionWidget;
             _restartRequest = restartRequest;
+            _selectedLocale = selectedLocale;
         }
         
         public void Initialize()
         {
             var localization = LocalizationSettings.Instance;
-            
-            var selectedLanguage = localization.GetSelectedLocale();
-            
+
             var widget = _languageSelectionWidget.LanguageWidgets.First(w =>
-                w.LanguageCode == selectedLanguage.LocaleName);
+                w.LanguageCode == _selectedLocale.LocaleName);
             
             _languageSelectionWidget.Initialize(widget);
 
