@@ -29,8 +29,17 @@ namespace WordMaster
 
             _gameFinishedPopup.ResumeGameButton.OnClickAsObservable().Subscribe(_ =>
             {
-                _gameFinishedPopup.Hide();
-                _resumeRequest.Value.OnNext(Unit.Default);
+                YandexGamesSdk.ShowRewardedAd()
+                    .OnRewardedAdWatched(() =>
+                    {
+                        _gameFinishedPopup.Hide();
+                        _resumeRequest.Value.OnNext(Unit.Default);
+                    })
+                    .OnRewardedAdOpen(() =>
+                    {
+                        // turn off volume
+                    })
+                    .AddTo(_player.Disposables);
             }).AddTo(_player.Disposables);
 
             _player.BestDistancePassed.Subscribe(distance =>

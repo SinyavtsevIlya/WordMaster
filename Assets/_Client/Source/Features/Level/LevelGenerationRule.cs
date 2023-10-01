@@ -41,7 +41,6 @@ namespace WordMaster
 
         private void GenerateLetters(int horizontalPosition)
         {
-            Debug.Log("Generate");
             if (_trie.Search(_player.Sequence.ToString(), out var variants, out var _))
             {
                 var shuffledVariants = GetShuffledVariants(variants);

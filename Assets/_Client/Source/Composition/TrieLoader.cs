@@ -18,15 +18,12 @@ namespace WordMaster
         public async Task<Trie> Load()
         {
             var filename = "nouns.txt";
-            
-            var filePath = Path.Combine(Application.dataPath, 
-                "_Client", "Content", "Common" , "Vocabulary", _language.ToString(), filename);
-            
+
             var trie = new Trie(_language);
             
             if (Application.platform == RuntimePlatform.WebGLPlayer)
             {
-                var www = UnityWebRequest.Get($"./{filename}");
+                var www = UnityWebRequest.Get($"./Vocabulary/{_language.ToString()}/{filename}");
                 var completionSource = new TaskCompletionSource<string>();
                 var operation = www.SendWebRequest();
                 operation.completed += op => completionSource.SetResult(www.downloadHandler.text);
@@ -49,6 +46,9 @@ namespace WordMaster
             }
             else
             {
+                var filePath = Path.Combine(Application.dataPath, 
+                    "_Client", "Content", "Common" , "Vocabulary", _language.ToString(), filename);
+                
                 using var reader = new StreamReader(filePath);
                 
                 while (reader.ReadLine() is { } line)

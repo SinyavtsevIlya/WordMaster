@@ -26,13 +26,13 @@ namespace WordMaster
                 new PlayerSerializationState(0, false, Application.systemLanguage) :
                 loadInfo.Result;
 
-            var locale = SyncLocalization(state);
+            var locale = await SyncLocalization(state);
 
             var alphabet = GetAlphabet(state.Language);
 
             await LoadTrie(state);
 
-            GetComponent<CoreInstaller>().Construct(saveLoad, _trie, state, alphabet, locale.Result);
+            GetComponent<CoreInstaller>().Construct(saveLoad, _trie, state, alphabet, locale);
             GetComponent<SceneContext>().Run();
         }
 
