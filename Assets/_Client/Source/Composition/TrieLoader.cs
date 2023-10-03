@@ -46,6 +46,7 @@ namespace WordMaster
             }
             else
             {
+                Debug.Log(Path.GetFullPath($"./Vocabulary/{_language.ToString()}/{filename}"));
                 var filePath = Path.Combine(Application.dataPath, 
                     "_Client", "Content", "Common" , "Vocabulary", _language.ToString(), filename);
                 

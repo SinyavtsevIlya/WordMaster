@@ -23,10 +23,10 @@ namespace WordMaster
                 throw loadInfo.Exception;
 
             var state = loadInfo.Status == LoadStatus.FileNotExist ?
-                new PlayerSerializationState(0, false, Application.systemLanguage) :
+                new PlayerSerializationState(0, false, YandexGamesSdk.GetUserLanguage()) :
                 loadInfo.Result;
 
-            var locale = await SyncLocalization(state);
+            var locale = await SyncLocalization(state.Language);
 
             var alphabet = GetAlphabet(state.Language);
 
@@ -42,14 +42,14 @@ namespace WordMaster
                 _trie = await new TrieLoader(state.Language).Load();
         }
 
-        private static async Task<Locale> SyncLocalization(PlayerSerializationState state)
+        private static async Task<Locale> SyncLocalization(SystemLanguage language)
         {
             var localization = LocalizationSettings.Instance;
 
             await localization.GetInitializationOperation().Task;
             
             var locales = localization.GetAvailableLocales().Locales;
-            var locale = locales.First(l => state.Language == SystemLanguage.Russian
+            var locale = locales.First(l => language == SystemLanguage.Russian
                 ? l.LocaleName == "Russian (ru)"
                 : l.LocaleName == "English (en)");
 

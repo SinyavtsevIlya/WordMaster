@@ -1,5 +1,6 @@
 ﻿using Rules;
 using UniRx;
+using UnityEngine;
 
 namespace WordMaster
 {
@@ -32,6 +33,7 @@ namespace WordMaster
                 YandexGamesSdk.ShowRewardedAd()
                     .OnRewardedAdWatched(() =>
                     {
+                        Debug.Log("Hide popup");
                         _gameFinishedPopup.Hide();
                         _resumeRequest.Value.OnNext(Unit.Default);
                     })
