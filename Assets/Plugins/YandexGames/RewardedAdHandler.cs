@@ -2,6 +2,8 @@
 
 public class RewardedAdHandler : IRewardedAdHandler
 {
+    public static int _NextHandlerId;
+    
     public int Id { get; }
     public Action Disposed { get; set; }
 
@@ -36,7 +38,7 @@ public class RewardedAdHandler : IRewardedAdHandler
 
     public RewardedAdHandler()
     {
-        Id = Guid.NewGuid().GetHashCode();
+        Id = _NextHandlerId++;
     }
     
     public void SetOpen() => RewardedAdOpen?.Invoke();

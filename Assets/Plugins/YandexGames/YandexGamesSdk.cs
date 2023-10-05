@@ -27,7 +27,10 @@ public class YandexGamesSdk : MonoBehaviour
     {
         var handler = new RewardedAdHandler();
         _handlers.Add(handler.Id, handler);
-        handler.Disposed += () => _handlers.Remove(handler.Id);
+        handler.Disposed += () =>
+        {
+            _handlers.Remove(handler.Id);
+        };
         ShowRewardedAdExternal(handler.Id);
 
         return handler;
@@ -43,10 +46,8 @@ public class YandexGamesSdk : MonoBehaviour
     [Preserve]
     public void OnRewardedAdWatched(int id)
     {
-        Debug.Log($"OnRewardedAdWatched {id}");
         if (_handlers.TryGetValue(id, out var handler))
         {
-            Debug.Log("Set Watched");
             handler.SetWatched();
             _handlers.Remove(id);
         }

@@ -1,6 +1,7 @@
 mergeInto(LibraryManager.library, {
 
   ShowRewardedAdExternal : function (id) {
+    var success = false;
     ysdk.adv.showRewardedVideo({
       callbacks: {
         onOpen: function() {
@@ -9,10 +10,13 @@ mergeInto(LibraryManager.library, {
         },
         onRewarded: function() {
           console.log('Rewarded!');
-          myGameInstance.SendMessage('YandexGamesDispatcher', 'OnRewardedAdWatched', id);
+          success = true;
         },
         onClose: function() {
           console.log('Video ad closed.');
+          if (success) {
+            myGameInstance.SendMessage('YandexGamesDispatcher', 'OnRewardedAdWatched', id);
+          }
           myGameInstance.SendMessage('YandexGamesDispatcher', 'OnRewardedAdClosed', id);
         },
         onError: function(e) {

@@ -46,9 +46,8 @@ namespace WordMaster
             Observable.FromEvent<Locale>(
                     h => localization.OnSelectedLocaleChanged += h,
                     h => localization.OnSelectedLocaleChanged -= h)
-                .Subscribe(_ =>
+                .Subscribe(locale =>
                 {
-                    var locale = localization.GetSelectedLocale();
                     var language = locale.LocaleName == "Russian (ru)"
                         ? SystemLanguage.Russian
                         : SystemLanguage.English;

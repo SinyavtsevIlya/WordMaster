@@ -31,15 +31,18 @@ namespace WordMaster
             _gameFinishedPopup.ResumeGameButton.OnClickAsObservable().Subscribe(_ =>
             {
                 YandexGamesSdk.ShowRewardedAd()
+                    .OnRewardedAdOpen(() =>
+                    {
+                        // turn volume off 
+                    })
                     .OnRewardedAdWatched(() =>
                     {
-                        Debug.Log("Hide popup");
                         _gameFinishedPopup.Hide();
                         _resumeRequest.Value.OnNext(Unit.Default);
                     })
-                    .OnRewardedAdOpen(() =>
+                    .OnRewardedAdClosed(() =>
                     {
-                        // turn off volume
+                        // turn volume on
                     })
                     .AddTo(_player.Disposables);
             }).AddTo(_player.Disposables);

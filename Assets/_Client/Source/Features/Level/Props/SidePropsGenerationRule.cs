@@ -70,7 +70,6 @@ namespace WordMaster
                     if (_player.DistancePassed - propInstance.transform.position.x > _level.Settings.LevelHalfWidth)
                     {
                         cullingDisposable?.Dispose();
-                        Debug.Log("Despawn");
                         propInstance.SetActive(false);
                         _pool.Enqueue(propInstance);
                     }
