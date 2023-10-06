@@ -25,6 +25,7 @@ namespace WordMaster
         {
             Observable.EveryUpdate()
                 .Where(_ => Input.GetMouseButton(0))
+                .Where(_ => Time.timeScale > 0f)
                 .Select(_ => Input.mousePosition)
                 .Select(GetWorldPosition)
                 .Pairwise()

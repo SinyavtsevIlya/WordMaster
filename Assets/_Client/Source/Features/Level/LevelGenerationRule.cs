@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Rules;
 using UniRx;
 using UnityEngine;
-using Zenject;
 using Random = System.Random;
 
 namespace WordMaster
 {
-    public class LevelGenerationRule : IRule, IInitializable
+    public class LevelGenerationRule : IRule
     {
         private static readonly Random Random = new Random();
 
@@ -86,13 +84,18 @@ namespace WordMaster
 
             _TokenlettersAmount += takeRange;
 
-            var wrongCharactersCount = _player.DistancePassed < 50 ? 0 : range.y - takeRange;
+            var wrongCharactersCount = range.y - takeRange;
 
-            shuffledVariants.AddRange(_alphabet.Values.Shuffle().Take(wrongCharactersCount));
+            if (ShouldSpawnWrongCharacters)
+                shuffledVariants.AddRange(_alphabet.Values.Shuffle().Take(wrongCharactersCount));
 
             shuffledVariants.Shuffle();
             return shuffledVariants;
         }
+        
+        private bool ShouldSpawnWrongCharacters => 
+            _player.DistancePassed > 50 || 
+            !Application.isMobilePlatform;
 
         private List<int> GetLetterPlacements(List<char> shuffledVariants)
         {

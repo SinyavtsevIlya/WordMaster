@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -15,6 +16,9 @@ public class YandexGamesSdk : MonoBehaviour
 
     public static SystemLanguage GetUserLanguage()
     {
+        if (Application.isEditor) 
+            return Application.systemLanguage;
+        
         var languageCode = GetLanguageExternal();
 
         if (languageCode == "ru") return SystemLanguage.Russian;
@@ -46,30 +50,39 @@ public class YandexGamesSdk : MonoBehaviour
     [Preserve]
     public void OnRewardedAdWatched(int id)
     {
-        if (_handlers.TryGetValue(id, out var handler))
+        MainThreadDispatcher.Post(_ =>
         {
-            handler.SetWatched();
-            _handlers.Remove(id);
-        }
+            if (_handlers.TryGetValue(id, out var handler))
+            {
+                handler.SetWatched();
+                _handlers.Remove(id);
+            }
+        }, null);
     }
 
     [Preserve]
     public void OnRewardedAdClosed(int id)
     {
-        if (_handlers.TryGetValue(id, out var handler))
+        MainThreadDispatcher.Post(_ =>
         {
-            handler.SetClosed();
-            _handlers.Remove(id);
-        }
+            if (_handlers.TryGetValue(id, out var handler))
+            {
+                handler.SetClosed();
+                _handlers.Remove(id);
+            }
+        }, null);
     }
 
     [Preserve]
     public void OnRewardedAdError(int id)
     {
-        if (_handlers.TryGetValue(id, out var handler))
+        MainThreadDispatcher.Post(_ =>
         {
-            handler.SetError();
-            _handlers.Remove(id);
-        }
+            if (_handlers.TryGetValue(id, out var handler))
+            {
+                handler.SetError();
+                _handlers.Remove(id);
+            }
+        }, null);
     }
 }
