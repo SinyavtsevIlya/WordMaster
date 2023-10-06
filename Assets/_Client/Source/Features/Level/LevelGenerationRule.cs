@@ -31,7 +31,7 @@ namespace WordMaster
         public void Initialize()
         {
             _player
-                .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + _level.Settings.LevelHalfWidth)
+                .ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + _level.LevelHalfWidth)
                 .Where(distancePassed => distancePassed % 5 == 0)
                 .Subscribe(GenerateLetters)
                 .AddTo(_level.Disposables);
@@ -99,8 +99,8 @@ namespace WordMaster
 
         private List<int> GetLetterPlacements(List<char> shuffledVariants)
         {
-            var verticalOffset = 2;
-            var levelHeight = _level.Settings.Height;
+            var verticalOffset = _level.Settings.VerticalOffset;
+            var levelHeight = _level.Height;
             var startPosition = (int)(-levelHeight / 2f) + verticalOffset;
             var length = levelHeight - verticalOffset * 2;
             var letterPlacements = Enumerable.Range(startPosition, length).ToList().Shuffle().Take(shuffledVariants.Count)

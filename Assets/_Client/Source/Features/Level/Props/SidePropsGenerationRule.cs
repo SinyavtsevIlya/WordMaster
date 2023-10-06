@@ -13,14 +13,16 @@ namespace WordMaster
     {
         private readonly Player _player;
         private readonly Level _level;
+        private readonly ZoomSettings _zoomSettings;
 
         private Queue<GameObject> _pool;
         private int _generationStep;
         
-        public SidePropsGenerationRule(Player player, Level level)
+        public SidePropsGenerationRule(Player player, Level level, ZoomSettings zoomSettings)
         {
             _player = player;
             _level = level;
+            _zoomSettings = zoomSettings;
         }
         
         public void Initialize()
@@ -31,15 +33,16 @@ namespace WordMaster
             foreach (var instance in _pool) 
                 instance.SetActive(false);
 
-            GenerateBackground(-(int)backgroundRenderer.bounds.size.x);
+            GenerateBackground(-backgroundRenderer.bounds.size.x / _zoomSettings.Value);
             GenerateBackground(0);
             RefreshGenerationStep();
 
-            var distanceChange = _player.ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + _level.Settings.LevelHalfWidth + 10)
+            var distanceChange = _player.ObserveEveryValueChanged(player => Mathf.RoundToInt(player.DistancePassed) + _level.LevelHalfWidth + 10)
                 .ToReadOnlyReactiveProperty();
             
             distanceChange
                 .Where(distancePassed => distancePassed % (int)backgroundRenderer.bounds.size.x == 0)
+                .Select(d => (float) d)
                 .Subscribe(GenerateBackground)
                 .AddTo(_level.Disposables);
             
@@ -52,7 +55,7 @@ namespace WordMaster
         private void GenerateProps(int generationPosition)
         {
             var sign = Random.value > .5f ? 1 : -1;
-            var spawnPosition = new Vector3(generationPosition, _level.Settings.Height / 2f * sign, 0f);
+            var spawnPosition = new Vector3(generationPosition, _level.Height / 2f * sign, 0f);
 
             if (_level.IsColliding(Vector2Int.RoundToInt(spawnPosition), 5))
                 return;
@@ -67,7 +70,7 @@ namespace WordMaster
             cullingDisposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (_player.DistancePassed - propInstance.transform.position.x > _level.Settings.LevelHalfWidth)
+                    if (_player.DistancePassed - propInstance.transform.position.x > _level.LevelHalfWidth)
                     {
                         cullingDisposable?.Dispose();
                         propInstance.SetActive(false);
@@ -85,10 +88,11 @@ namespace WordMaster
             _generationStep = 12;
         }
 
-        private void GenerateBackground(int generationPosition)
+        private void GenerateBackground(float generationPosition)
         {
             var background = Object.Instantiate(_level.Settings.Background);
             background.transform.position += Vector3.right * generationPosition;
+            background.transform.localScale = Vector3.one / _zoomSettings.Value;
         }
     }
 }

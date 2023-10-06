@@ -305,6 +305,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be141a2c2999f3447b8fcd661a1ca7b5, type: 2}
   - {fileID: 11400000, guid: e603bc41a5c4f6645aefc037977d85d3, type: 2}
   - {fileID: 11400000, guid: 5fb6f4eaea47b934f8433e62da765dc0, type: 2}
+  _mobileSettings:
+  - {fileID: 11400000, guid: 4be4356e780d8184b91ff358d4403061, type: 2}
+  _desktopSettings:
+  - {fileID: 11400000, guid: cce09b1d5292cf9459d23cefda67333e, type: 2}
 --- !u!4 &1199240853
 Transform:
   m_ObjectHideFlags: 0

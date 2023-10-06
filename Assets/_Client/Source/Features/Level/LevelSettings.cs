@@ -8,6 +8,7 @@ namespace WordMaster
         [field: SerializeField] public Vector2Int RightCharactersPerStep { get; private set; }
         [field: SerializeField] public Vector2Int WrongCharactersPerStep { get; private set; }
         [field: SerializeField] public int Height { get; private set; }
+        [field: SerializeField] public int VerticalOffset { get; private set; }
         [field: SerializeField] public int GenerationOffset { get; private set; }
         [field: SerializeField] public int GenerationOffsetRandomization { get; private set; }
         [field: SerializeField] public int StageWidth { get; private set; }
@@ -19,7 +20,5 @@ namespace WordMaster
         [field: SerializeField] public GameObject ConnectionHintArrowPrefab;
         [field: SerializeField] public PropSettings[] Props { get; private set; }
         [field: SerializeField] public GameObject Background { get; private set; }
-        
-        public int LevelHalfWidth => (int) ((float) Screen.width / Screen.height * Height / 2f + GenerationOffset);
     }
 }

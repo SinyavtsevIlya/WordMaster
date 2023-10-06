@@ -39,7 +39,7 @@ namespace WordMaster
             if (_player.BestDistancePassed.Value > 0)
             {
                 var bestDistanceMarker = _bestDistanceMarkerFactory.Create();
-                bestDistanceMarker.SetDistance(_player.BestDistancePassed.Value);
+                bestDistanceMarker.SetDistance(_player.BestDistancePassed.Value, _level.HalfHeight - _level.Settings.VerticalOffset);
                 
                 var position = Vector2Int.RoundToInt(bestDistanceMarker.transform.position);
                 _level.UsedPositions.Add(position);
@@ -49,7 +49,7 @@ namespace WordMaster
         private void GenerateDistanceMarkers(int horizontalPosition)
         {
             var distanceMarker = _distanceMarkerFactory.Create();
-            distanceMarker.SetDistance(horizontalPosition);
+            distanceMarker.SetDistance(horizontalPosition, _level.HalfHeight - _level.Settings.VerticalOffset);
             
             var position = Vector2Int.RoundToInt(distanceMarker.transform.position);
             _level.UsedPositions.Add(position);
@@ -58,7 +58,7 @@ namespace WordMaster
             cullingDisposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (_player.DistancePassed - distanceMarker.transform.position.x > _level.Settings.LevelHalfWidth)
+                    if (_player.DistancePassed - distanceMarker.transform.position.x > _level.LevelHalfWidth)
                     {
                         cullingDisposable?.Dispose();
                         distanceMarker.Dispose();

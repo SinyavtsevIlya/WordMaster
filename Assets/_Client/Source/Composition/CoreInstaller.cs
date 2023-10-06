@@ -13,6 +13,9 @@ namespace WordMaster
         [SerializeField] private CameraSettings _cameraSettings;
         [SerializeField] private ScriptableObject[] _settings;
 
+        [SerializeField] private ScriptableObject[] _mobileSettings;
+        [SerializeField] private ScriptableObject[] _desktopSettings;
+
         private PlayerSerializationState _playerSerializationState;
         private ISaveLoad _saveLoad;
         private Trie _trie;
@@ -66,11 +69,24 @@ namespace WordMaster
             }
 
             Container.Bind<ISaveLoad>().FromInstance(_saveLoad).AsSingle();
-            
-            Container.Bind<Camera>().FromComponentInNewPrefab(_cameraSettings.Prefab).AsSingle();
+
+            Container.Bind<Camera>()
+                .FromComponentInNewPrefab(_cameraSettings.Prefab)
+                .AsSingle();
             
             foreach (var s in _settings) 
                 Container.Bind(s.GetType()).FromInstance(s).AsSingle();
+
+            if (Application.isMobilePlatform)
+            {
+                foreach (var s in _mobileSettings) 
+                    Container.Bind(s.GetType()).FromInstance(s).AsSingle();
+            }
+            else
+            {
+                foreach (var s in _desktopSettings) 
+                    Container.Bind(s.GetType()).FromInstance(s).AsSingle();
+            }
             
             InstallScreenOrientation();
         }

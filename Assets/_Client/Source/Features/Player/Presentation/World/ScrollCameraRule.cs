@@ -12,13 +12,16 @@ namespace WordMaster
         private readonly Camera _camera;
         private readonly Player _player;
         private readonly CompositeDisposable _disposables;
+        private readonly ZoomSettings _zoomSettings;
 
-        public ScrollCameraRule(CameraSettings settings, Camera camera, Player player, CompositeDisposable disposables)
+        public ScrollCameraRule(CameraSettings settings, Camera camera, Player player, CompositeDisposable disposables, 
+            ZoomSettings zoomSettings)
         {
             _settings = settings;
             _camera = camera;
             _player = player;
             _disposables = disposables;
+            _zoomSettings = zoomSettings;
         }
 
         public void Initialize()
@@ -40,6 +43,8 @@ namespace WordMaster
                     var translation = Vector3.right * Time.deltaTime * _settings.ScrollSpeed * speedup;
                     _camera.transform.Translate(translation);
                 }).AddTo(_disposables);
+
+            _camera.fieldOfView /= _zoomSettings.Value;
         }
     }
 }

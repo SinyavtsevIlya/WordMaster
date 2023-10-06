@@ -25,7 +25,7 @@ namespace WordMaster
                 var culling = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (_player.DistancePassed - letter.Position.Value.x >
-                        _level.Settings.LevelHalfWidth)
+                        _level.LevelHalfWidth)
                     {
                         letter.Culled.OnNext(Unit.Default);
                         letter.Dispose();
