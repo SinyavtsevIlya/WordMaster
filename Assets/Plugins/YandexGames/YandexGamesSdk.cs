@@ -30,13 +30,13 @@ public class YandexGamesSdk : MonoBehaviour
     public static RewardedAdHandler ShowRewardedAd()
     {
         var handler = new RewardedAdHandler();
+        
         _handlers.Add(handler.Id, handler);
-        handler.Disposed += () =>
-        {
-            _handlers.Remove(handler.Id);
-        };
-        ShowRewardedAdExternal(handler.Id);
-
+        handler.Disposed += () => _handlers.Remove(handler.Id);
+        
+        if (!Application.isEditor)
+            ShowRewardedAdExternal(handler.Id);
+        
         return handler;
     }
 

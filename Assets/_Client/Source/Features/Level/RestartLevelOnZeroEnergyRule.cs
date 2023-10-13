@@ -33,7 +33,9 @@ namespace WordMaster
                 })
                 .AddTo(_player.Disposables);
 
-            _restartRequest.Value.Subscribe(_ =>
+            _restartRequest.Value
+                .ObserveOnMainThread().DelayFrame(1)
+                .Subscribe(_ =>
             {
                 Time.timeScale = 1f;
                 _player.Dispose();

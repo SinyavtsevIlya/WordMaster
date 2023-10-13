@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ namespace WordMaster
     public class GameFinishedPopup : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
+        [SerializeField] private CanvasGroup _canvasGroup;
         
         public Button ResumeGameButton;
         public Button RestartGameButton;
@@ -31,12 +33,30 @@ namespace WordMaster
 
         public void Show()
         {
-            _animator.SetTrigger("Show");
+            if (IsAnimatable)
+                _animator.SetTrigger("Show");
+            else
+                DisplayImmediately(true);
         }
-
+        
         public void Hide()
         {
-            _animator.SetTrigger("Hide");
+            if (IsAnimatable)
+                _animator.SetTrigger("Hide");
+            else
+                DisplayImmediately(false);
+        }
+
+        private void DisplayImmediately(bool value) => _canvasGroup.alpha = value ? 1f : default; 
+        
+        private static bool IsAnimatable => !Application.isMobilePlatform;
+
+        private void Awake()
+        {
+            _animator.enabled = IsAnimatable;
+            
+            if (!IsAnimatable)
+                DisplayImmediately(false);
         }
     }
 }

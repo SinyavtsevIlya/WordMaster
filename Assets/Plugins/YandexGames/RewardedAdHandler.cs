@@ -20,6 +20,10 @@ public class RewardedAdHandler : IRewardedAdHandler
 
     public RewardedAdHandler OnRewardedAdWatched(Action callback)
     {
+#if UNITY_EDITOR
+        callback?.Invoke();
+#endif
+        
         RewardedAdWatched += callback;
         return this;
     }

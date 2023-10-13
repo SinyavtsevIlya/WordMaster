@@ -15,6 +15,8 @@ namespace WordMaster
 
         public int Height => (int) (Settings.Height / _zoomSettings.Value);
 
+        public float VerticalOffset => Settings.VerticalOffset / _zoomSettings.Value;
+
         public float HalfHeight => Height / 2f;
 
         public int LevelHalfWidth => (int) ((float) Screen.width / Screen.height * Height / 2f + Settings.GenerationOffset);

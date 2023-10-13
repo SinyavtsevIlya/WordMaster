@@ -15,7 +15,7 @@ MonoBehaviour:
   <RightCharactersPerStep>k__BackingField: {x: 2, y: 4}
   <WrongCharactersPerStep>k__BackingField: {x: 1, y: 2}
   <Height>k__BackingField: 20
-  <VerticalOffset>k__BackingField: 2
+  <VerticalOffset>k__BackingField: 3
   <GenerationOffset>k__BackingField: 5
   <GenerationOffsetRandomization>k__BackingField: 2
   <StageWidth>k__BackingField: 100

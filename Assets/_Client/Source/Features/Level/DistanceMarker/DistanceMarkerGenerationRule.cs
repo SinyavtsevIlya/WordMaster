@@ -49,7 +49,7 @@ namespace WordMaster
         private void GenerateDistanceMarkers(int horizontalPosition)
         {
             var distanceMarker = _distanceMarkerFactory.Create();
-            distanceMarker.SetDistance(horizontalPosition, _level.HalfHeight - _level.Settings.VerticalOffset);
+            distanceMarker.SetDistance(horizontalPosition, _level.HalfHeight - _level.VerticalOffset);
             
             var position = Vector2Int.RoundToInt(distanceMarker.transform.position);
             _level.UsedPositions.Add(position);

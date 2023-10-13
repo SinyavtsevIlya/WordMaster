@@ -2620,6 +2620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 9051586402955940170}
+  _canvasGroup: {fileID: 3775142932604774749}
   ResumeGameButton: {fileID: 3347549922667300494}
   RestartGameButton: {fileID: 362383398720134570}
   _bestDistanceLabel: {fileID: 5797154075762460284}
